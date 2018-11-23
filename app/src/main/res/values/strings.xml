@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MoneyManager</string>
-    <string name="available_budget">Available Budget: </string>
-    <string name="total_spend">Total Spend: </string>
-    <string name="balance">Balance: </string>
-    <string name="start">Start</string>
+    <string name="available_budget">Available Budget</string>
+    <string name="total_spend">Total Spend</string>
+    <string name="balance">Balance</string>
+    <string name="record">Record</string>
 </resources>

@@ -18,8 +18,11 @@ public class SplashScreen extends AppCompatActivity {
 
     private ImageView splash;
     private TextView tv_availableBudget;
+    private TextView tv_availableBudgetData;
     private TextView tv_totalSpent;
+    private TextView tv_totalSpentData;
     private TextView tv_balance;
+    private TextView tv_balanceData;
     private Button btn_start;
 
     @Override
@@ -32,8 +35,11 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
 
         tv_availableBudget = (TextView)findViewById(R.id.tv_availableBudget);
+        tv_availableBudgetData = (TextView) findViewById(R.id.tv_availableBudgetData);
         tv_totalSpent = (TextView)findViewById(R.id.tv_totalSpent);
+        tv_totalSpentData = (TextView)findViewById(R.id.tv_totalSpentData);
         tv_balance =(TextView)findViewById(R.id.tv_balance);
+        tv_balanceData = (TextView)findViewById(R.id.tv_balanceData);
         btn_start =(Button)findViewById(R.id.btn_start);
 
         splash = (ImageView)findViewById(R.id.iv_Splash);
@@ -51,8 +57,12 @@ public class SplashScreen extends AppCompatActivity {
                 animatorY.start();
 
                 tv_availableBudget.setVisibility(View.VISIBLE);
+                tv_availableBudgetData.setVisibility(View.VISIBLE);
                 tv_totalSpent.setVisibility(View.VISIBLE);
+                tv_totalSpentData.setVisibility(View.VISIBLE);
                 tv_balance.setVisibility(View.VISIBLE);
+                tv_balanceData.setVisibility(View.VISIBLE);
+
                 btn_start.setVisibility(View.VISIBLE);
                 btn_start.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -62,7 +72,7 @@ public class SplashScreen extends AppCompatActivity {
                     }
                 });
             }
-        },3000);
+        },2500);
 
     }
 }
