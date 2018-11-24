@@ -44,7 +44,7 @@ public class SplashScreen extends AppCompatActivity {
 
         splash = (ImageView)findViewById(R.id.iv_Splash);
         Glide.with(this)
-                .load(R.drawable.splash_gif)
+                .load(R.drawable.splash_animation)
                 .into(splash);
 
         Handler handler = new Handler();
@@ -67,7 +67,7 @@ public class SplashScreen extends AppCompatActivity {
                 btn_start.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(SplashScreen.this, MainActivity.class));
+                        startActivity(new Intent(SplashScreen.this, MoneyManagerActivity.class));
                         SplashScreen.this.finish();
                     }
                 });
