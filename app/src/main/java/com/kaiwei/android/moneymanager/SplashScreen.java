@@ -67,7 +67,7 @@ public class SplashScreen extends AppCompatActivity {
                 btn_start.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(SplashScreen.this, MoneyManagerActivity.class));
+                        startActivity(new Intent(SplashScreen.this, IncomeListActivity.class));
                         SplashScreen.this.finish();
                     }
                 });

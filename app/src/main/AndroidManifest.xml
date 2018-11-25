@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MoneyManagerActivity"></activity>
+        <activity android:name=".IncomeListActivity"></activity>
     </application>
 
 </manifest>
