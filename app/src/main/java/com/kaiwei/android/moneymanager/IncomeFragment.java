@@ -43,11 +43,19 @@ public class IncomeFragment extends Fragment {
         mIncome = IncomeLab.get(getActivity()).getIncome(incomeId);
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        IncomeLab.get(getActivity())
+                .updateIncome(mIncome);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_income, container, false);
-        getActivity().setTitle(R.string.fragment_income);
+        getActivity().setTitle(R.string.title_income);
 
         mDateButton = (Button) v.findViewById(R.id.income_date);
         mDateButton.setText(mIncome.getIncomeDate().toString());

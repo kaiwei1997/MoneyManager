@@ -47,6 +47,7 @@ public class IncomeListFragment extends Fragment {
             mIncomeAdapter = new IncomeAdapter(incomes);
             mIncomeRecyclerView.setAdapter(mIncomeAdapter);
         }else {
+            mIncomeAdapter.setIncomes(incomes);
             mIncomeAdapter.notifyDataSetChanged();
         }
     }
@@ -107,6 +108,10 @@ public class IncomeListFragment extends Fragment {
         @Override
         public int getItemCount() {
             return mIncomes.size();
+        }
+
+        public void setIncomes(List<Income> incomes) {
+            mIncomes = incomes;
         }
     }
 }

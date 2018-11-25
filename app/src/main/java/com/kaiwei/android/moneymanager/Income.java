@@ -11,8 +11,12 @@ public class Income {
     private String mIncomeCategory;
     private String mIncomeNote;
 
-    public Income(){
-        mIncomeId = UUID.randomUUID();
+    public Income() {
+        this(UUID.randomUUID());
+    }
+
+    public Income(UUID id){
+        mIncomeId = id;
         mIncomeDate = new Date();
     }
 
