@@ -11,10 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class IncomeListFragment extends Fragment {
@@ -35,12 +33,22 @@ public class IncomeListFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUI();
+    }
+
     private void updateUI(){
         IncomeLab incomeLab = IncomeLab.get(getActivity());
         List<Income> incomes = incomeLab.getIncomes();
 
-        mIncomeAdapter = new IncomeAdapter(incomes);
-        mIncomeRecyclerView.setAdapter(mIncomeAdapter);
+        if(mIncomeAdapter==null) {
+            mIncomeAdapter = new IncomeAdapter(incomes);
+            mIncomeRecyclerView.setAdapter(mIncomeAdapter);
+        }else {
+            mIncomeAdapter.notifyDataSetChanged();
+        }
     }
 
     private class IncomeHolder extends RecyclerView.ViewHolder
@@ -63,12 +71,13 @@ public class IncomeListFragment extends Fragment {
             mIncome = income;
             mCategoryTextView.setText(mIncome.getIncomeCategory());
             mDateTextView.setText(mIncome.getIncomeDate().toString());
-            mAmountTextView.setText(String.valueOf(mIncome.getIncomeTotal()));
+            DecimalFormat precision = new DecimalFormat("RM 0.00");
+            mAmountTextView.setText(precision.format(mIncome.getIncomeTotal()));
         }
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(getActivity(), MoneyManagerActivity.class);
+            Intent intent = IncomePagerActivity.newIntent(getActivity(), mIncome.getIncomeId());
             startActivity(intent);
         }
     }

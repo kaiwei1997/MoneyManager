@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteY="81dp">
 
     <Button
         android:id="@+id/income_date"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:layout_width="352dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
@@ -22,32 +22,32 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="77dp"
-        android:layout_height="49dp"
+        android:layout_width="66dp"
+        android:layout_height="45dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:text="@string/currency"
-        android:textAlignment="center"
         android:textColor="#000"
         android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="@+id/income_total"
         app:layout_constraintEnd_toStartOf="@+id/income_total"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/income_date" />
+        app:layout_constraintTop_toTopOf="@+id/income_total" />
 
     <EditText
         android:id="@+id/income_total"
-        android:layout_width="267dp"
+        android:layout_width="0dp"
         android:layout_height="49dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="14dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:autoText="false"
         android:hint="@string/amount_hint"
         android:importantForAutofill="no"
         android:inputType="numberDecimal"
         android:textColor="#000"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_chooseCategory"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/income_date" />
@@ -55,24 +55,26 @@
     <TextView
         android:id="@+id/tv_chooseCategory"
         android:layout_width="0dp"
-        android:layout_height="28dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="145dp"
         android:layout_marginEnd="16dp"
         android:text="@string/choose_category"
         android:textColor="#000"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/spinner_incomeCategory"
         android:layout_width="0dp"
-        android:layout_height="34dp"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/income_note"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_chooseCategory" />
@@ -82,45 +84,40 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         android:ems="10"
         android:hint="@string/note_hint"
+        android:importantForAutofill="no"
         android:inputType="textMultiLine"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_incomeCategory"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498" />
 
     <Button
-        style="@style/Widget.AppCompat.Button.Colored"
         android:id="@+id/btn_cancel"
-        android:drawableStart="@drawable/ic_cancel"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="180dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="12dp"
-        android:layout_marginBottom="165dp"
+        android:drawableStart="@drawable/ic_cancel"
         android:text="@string/cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_addIncome"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/income_note"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/income_note" />
 
     <Button
-        style="@style/Widget.AppCompat.Button.Colored"
         android:id="@+id/btn_addIncome"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
-        android:drawableStart="@drawable/ic_income"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="165dp"
+        android:drawableStart="@drawable/ic_income"
         android:text="@string/add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/income_note" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/btn_cancel"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

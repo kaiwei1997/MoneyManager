@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.util.UUID;
+
 public class IncomeFragment extends Fragment {
     private Income mIncome;
     private Button mDateButton;
@@ -23,10 +25,22 @@ public class IncomeFragment extends Fragment {
     private Spinner mCategorySpinner;
     private EditText mNoteField;
 
+    private static final String ARG_INCOME_ID = "income_id";
+
+    public static IncomeFragment newInstance(UUID incomeId) {
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_INCOME_ID, incomeId);
+
+        IncomeFragment incomeFragment = new IncomeFragment();
+        incomeFragment.setArguments(args);
+        return incomeFragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mIncome = new Income();
+        UUID incomeId = (UUID) getArguments().getSerializable(ARG_INCOME_ID);
+        mIncome = IncomeLab.get(getActivity()).getIncome(incomeId);
     }
 
     @Nullable
@@ -40,6 +54,7 @@ public class IncomeFragment extends Fragment {
         mDateButton.setEnabled(false);
 
         mAmountField = (EditText) v.findViewById(R.id.income_total);
+        mAmountField.setText(String.valueOf(mIncome.getIncomeTotal()));
         mAmountField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -48,9 +63,9 @@ public class IncomeFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(TextUtils.isEmpty(s.toString().trim())){
+                if (TextUtils.isEmpty(s.toString().trim())) {
                     mAmountField.setText("0");
-                }else{
+                } else {
                     mIncome.setIncomeTotal(Double.valueOf(s.toString()));
                 }
             }
@@ -63,18 +78,19 @@ public class IncomeFragment extends Fragment {
 
         mCategorySpinner = (Spinner) v.findViewById(R.id.spinner_incomeCategory);
         mCategorySpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-                                                       @Override
-                                                       public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                                           mIncome.setIncomeCategory(parent.getItemAtPosition(position).toString());
-                                                       }
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mIncome.setIncomeCategory(parent.getItemAtPosition(position).toString());
+            }
 
-                                                       @Override
-                                                       public void onNothingSelected(AdapterView<?> parent) {
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-                                                       }
-                                                   });
+            }
+        });
 
-                mNoteField = (EditText) v.findViewById(R.id.income_note);
+        mNoteField = (EditText) v.findViewById(R.id.income_note);
+        mNoteField.setText(mIncome.getIncomeNote());
         mNoteField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
