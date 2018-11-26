@@ -1,9 +1,8 @@
 <resources>
     <string name="app_name">Money Manager</string>
-    <string name="available_budget">Available Budget</string>
-    <string name="total_spend">Total Spend</string>
-    <string name="balance">Balance</string>
-    <string name="record">Record</string>
+    <string name="welcome">Hello, Welcome Back \n Money Manager</string>
+    <string name="intro">Money Manger let you record all your income and expenses.So you will not get broke</string>
+    <string name="record">Start Now</string>
     <string name="currency">MYR</string>
     <string name="amount_hint">Amount</string>
     <string name="choose_category">Choose Category</string>

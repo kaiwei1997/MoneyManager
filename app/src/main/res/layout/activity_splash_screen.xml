@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashScreen"
-    android:background="@drawable/splash_background_gradient">
+    android:background="@drawable/splash_background_gradient"
+    android:animateLayoutChanges="true"
+    tools:context=".SplashScreen">
 
     <ImageView
         android:id="@+id/iv_Splash"
@@ -17,114 +18,54 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/ic_launcher_money_manager_round" />
 
-    <TextView
-        android:id="@+id/tv_availableBudget"
-        android:layout_width="wrap_content"
-        android:layout_height="19dp"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="308dp"
-        android:layout_marginEnd="136dp"
-        android:layout_marginBottom="10dp"
-        android:text="@string/available_budget"
-        android:textColor="#fff"
-        android:textSize="18dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/tv_availableBudgetData"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.75"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_availableBudgetData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="188dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="188dp"
-        android:text="0"
-        android:textSize="16dp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_availableBudget" />
-
-    <TextView
-        android:id="@+id/tv_totalSpent"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="151dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="150dp"
-        android:text="@string/total_spend"
-        android:textColor="#fff"
-        android:textSize="18dp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_availableBudgetData" />
-
-    <TextView
-        android:id="@+id/tv_totalSpentData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="188dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="188dp"
-        android:text="0"
-        android:textSize="16dp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_totalSpent" />
-
-    <TextView
-        android:id="@+id/tv_balance"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="165dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="164dp"
-        android:text="@string/balance"
-        android:textColor="#fff"
-        android:textSize="18dp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_totalSpentData" />
-
-    <TextView
-        android:id="@+id/tv_balanceData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="188dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="188dp"
-        android:text="0"
-        android:textSize="16dp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_balance" />
-
     <Button
         android:id="@+id/btn_start"
-        android:background="@drawable/button"
         android:layout_width="231dp"
         android:layout_height="49dp"
         android:layout_marginStart="148dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="148dp"
         android:layout_marginBottom="24dp"
+        android:background="@drawable/button"
         android:padding="15dp"
         android:text="@string/record"
-        android:textSize="18dp"
         android:textColor="#0820FF"
+        android:textSize="18dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_balanceData" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_welcome"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/welcome"
+        android:textAlignment="center"
+        android:textSize="25dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/tv_intro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.547"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_intro"
+        android:layout_width="336dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="140dp"
+        android:text="@string/intro"
+        android:textAlignment="center"
+        android:textSize="22dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>

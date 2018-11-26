@@ -1,5 +1,7 @@
 package com.kaiwei.android.moneymanager;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Handler;
@@ -17,12 +19,8 @@ import com.bumptech.glide.Glide;
 public class SplashScreen extends AppCompatActivity {
 
     private ImageView splash;
-    private TextView tv_availableBudget;
-    private TextView tv_availableBudgetData;
-    private TextView tv_totalSpent;
-    private TextView tv_totalSpentData;
-    private TextView tv_balance;
-    private TextView tv_balanceData;
+    private TextView tv_welcome;
+    private TextView tv_intro;
     private Button btn_start;
 
     @Override
@@ -34,12 +32,8 @@ public class SplashScreen extends AppCompatActivity {
 
         setContentView(R.layout.activity_splash_screen);
 
-        tv_availableBudget = (TextView)findViewById(R.id.tv_availableBudget);
-        tv_availableBudgetData = (TextView) findViewById(R.id.tv_availableBudgetData);
-        tv_totalSpent = (TextView)findViewById(R.id.tv_totalSpent);
-        tv_totalSpentData = (TextView)findViewById(R.id.tv_totalSpentData);
-        tv_balance =(TextView)findViewById(R.id.tv_balance);
-        tv_balanceData = (TextView)findViewById(R.id.tv_balanceData);
+        tv_welcome = (TextView)findViewById(R.id.tv_welcome);
+        tv_intro = (TextView)findViewById(R.id.tv_intro);
         btn_start =(Button)findViewById(R.id.btn_start);
 
         splash = (ImageView)findViewById(R.id.iv_Splash);
@@ -54,16 +48,37 @@ public class SplashScreen extends AppCompatActivity {
                 splash.setImageDrawable(getResources().getDrawable(R.drawable.logo));
                 ObjectAnimator animatorY = ObjectAnimator.ofFloat(splash, "y", -1f);
                 animatorY.setDuration(1000);
+                animatorY.addListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        tv_welcome.setVisibility(View.VISIBLE);
+                        tv_welcome.animate()
+                                .translationY(-80)
+                                .alpha(1.0f)
+                                .setDuration(1000)
+                                .setListener(new AnimatorListenerAdapter() {
+                                    @Override
+                                    public void onAnimationEnd(Animator animation) {
+                                        super.onAnimationEnd(animation);
+                                        tv_intro.setVisibility(View.VISIBLE);
+                                        tv_intro.animate()
+                                                .translationY(-90)
+                                                .alpha(1.0f)
+                                                .setDuration(1000)
+                                                .setListener(new AnimatorListenerAdapter() {
+                                                    @Override
+                                                    public void onAnimationEnd(Animator animation) {
+                                                        super.onAnimationEnd(animation);
+                                                        btn_start.setVisibility(View.VISIBLE);
+                                                    }
+                                                });
+                                    }
+                                });
+                    }
+                });
                 animatorY.start();
 
-                tv_availableBudget.setVisibility(View.VISIBLE);
-                tv_availableBudgetData.setVisibility(View.VISIBLE);
-                tv_totalSpent.setVisibility(View.VISIBLE);
-                tv_totalSpentData.setVisibility(View.VISIBLE);
-                tv_balance.setVisibility(View.VISIBLE);
-                tv_balanceData.setVisibility(View.VISIBLE);
-
-                btn_start.setVisibility(View.VISIBLE);
                 btn_start.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
