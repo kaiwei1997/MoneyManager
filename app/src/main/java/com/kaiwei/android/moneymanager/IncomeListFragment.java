@@ -8,6 +8,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -19,12 +22,18 @@ public class IncomeListFragment extends Fragment {
     private RecyclerView mIncomeRecyclerView;
     private IncomeAdapter mIncomeAdapter;
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_income_list, container, false);
 
-        mIncomeRecyclerView = (RecyclerView)view
+        mIncomeRecyclerView = (RecyclerView) view
                 .findViewById(R.id.income_recycler_view);
         mIncomeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -39,27 +48,46 @@ public class IncomeListFragment extends Fragment {
         updateUI();
     }
 
-    private void updateUI(){
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fargment_income_list, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.new_income:
+                Income income = new Income();
+                IncomeLab.get(getActivity()).addIncome(income);
+                Intent intent = IncomePagerActivity.newIntent(getActivity(), income.getIncomeId());
+                startActivity(intent);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void updateUI() {
         IncomeLab incomeLab = IncomeLab.get(getActivity());
         List<Income> incomes = incomeLab.getIncomes();
 
-        if(mIncomeAdapter==null) {
+        if (mIncomeAdapter == null) {
             mIncomeAdapter = new IncomeAdapter(incomes);
             mIncomeRecyclerView.setAdapter(mIncomeAdapter);
-        }else {
+        } else {
             mIncomeAdapter.setIncomes(incomes);
             mIncomeAdapter.notifyDataSetChanged();
         }
     }
 
     private class IncomeHolder extends RecyclerView.ViewHolder
-            implements View.OnClickListener{
+            implements View.OnClickListener {
         private Income mIncome;
         private TextView mCategoryTextView;
         private TextView mDateTextView;
         private TextView mAmountTextView;
 
-        public IncomeHolder(LayoutInflater inflater, ViewGroup parent){
+        public IncomeHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_income, parent, false));
             itemView.setOnClickListener(this);
 
@@ -68,7 +96,7 @@ public class IncomeListFragment extends Fragment {
             mAmountTextView = (TextView) itemView.findViewById(R.id.incomeAmount);
         }
 
-        public void bind(Income income){
+        public void bind(Income income) {
             mIncome = income;
             mCategoryTextView.setText(mIncome.getIncomeCategory());
             mDateTextView.setText(mIncome.getIncomeDate().toString());
@@ -83,11 +111,14 @@ public class IncomeListFragment extends Fragment {
         }
     }
 
-    private class IncomeAdapter extends RecyclerView.Adapter<IncomeHolder>{
+    private class IncomeAdapter extends RecyclerView.Adapter<IncomeHolder> {
 
         private List<Income> mIncomes;
 
-        public IncomeAdapter(List<Income> incomes){
+        public void setIncomes(List<Income> incomes) {
+            mIncomes = incomes;
+        }
+        public IncomeAdapter(List<Income> incomes) {
             mIncomes = incomes;
         }
 
@@ -110,8 +141,6 @@ public class IncomeListFragment extends Fragment {
             return mIncomes.size();
         }
 
-        public void setIncomes(List<Income> incomes) {
-            mIncomes = incomes;
-        }
+
     }
 }

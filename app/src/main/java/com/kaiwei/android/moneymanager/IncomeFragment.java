@@ -12,10 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 public class IncomeFragment extends Fragment {
@@ -25,7 +29,13 @@ public class IncomeFragment extends Fragment {
     private Spinner mCategorySpinner;
     private EditText mNoteField;
 
+    String[] category = new String[]{
+            "Deposit",
+            "Salary"
+    };
+
     private static final String ARG_INCOME_ID = "income_id";
+
 
     public static IncomeFragment newInstance(UUID incomeId) {
         Bundle args = new Bundle();
@@ -41,6 +51,7 @@ public class IncomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         UUID incomeId = (UUID) getArguments().getSerializable(ARG_INCOME_ID);
         mIncome = IncomeLab.get(getActivity()).getIncome(incomeId);
+
     }
 
     @Override
@@ -85,6 +96,13 @@ public class IncomeFragment extends Fragment {
         });
 
         mCategorySpinner = (Spinner) v.findViewById(R.id.spinner_incomeCategory);
+        final List<String> categoryList = new ArrayList<>(Arrays.asList(category));
+
+        final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
+                getActivity(),android.R.layout.simple_spinner_item,categoryList);
+
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mCategorySpinner.setAdapter(spinnerArrayAdapter);
         mCategorySpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

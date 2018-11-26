@@ -14,11 +14,11 @@ public class IncomeActivity extends SingleFragmentActivity {
     private static final String EXTRA_INCOME_ID =
             "com.kaiwei.android.moneymanager.income_id";
 
-    /**public static Intent newIntent(Context packageContext, UUID incomeId){
+    public static Intent newIntent(Context packageContext, UUID incomeId){
         Intent intent = new Intent(packageContext, IncomeActivity.class);
         intent.putExtra(EXTRA_INCOME_ID, incomeId);
         return intent;
-    }**/
+    }
 
     @Override
     protected Fragment createFragment() {

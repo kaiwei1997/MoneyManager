@@ -49,7 +49,7 @@ public class IncomeLab {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()){
                 incomes.add(cursor.getIncome());
-                cursor.moveToLast();
+                cursor.moveToNext();
             }
         }finally {
             cursor.close();
@@ -86,11 +86,11 @@ public class IncomeLab {
                 new String[]{uuidString});
     }
 
-    private IncomeCursorWrapper queryIncomes(String whereCaluse, String[] whereArgs){
+    private IncomeCursorWrapper queryIncomes(String whereClause, String[] whereArgs){
         Cursor cursor = mDatabase.query(
                 IncomeTable.NAME,
                 null,
-                whereCaluse,
+                whereClause,
                 whereArgs,
                 null,
                 null,

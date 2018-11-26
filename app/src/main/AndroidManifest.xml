@@ -4,6 +4,8 @@
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
+        android:largeHeap="true"
         android:icon="@mipmap/ic_launcher_money_manager"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_money_manager_round"
@@ -17,7 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".OverviewActivity"></activity>
-        <activity android:name=".IncomePagerActivity"></activity>
+        <activity
+            android:name=".IncomePagerActivity"
+            android:parentActivityName=".IncomeListActivity"></activity>
         <activity android:name=".IncomeListActivity"></activity>
     </application>
 

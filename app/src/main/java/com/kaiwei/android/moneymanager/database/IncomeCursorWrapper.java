@@ -25,7 +25,7 @@ public class IncomeCursorWrapper extends CursorWrapper {
         income.setIncomeTotal(amount);
         income.setIncomeCategory(category);
         income.setIncomeDate(new Date(date));
-        income .setIncomeNote(note);
+        income.setIncomeNote(note);
 
         return income;
     }

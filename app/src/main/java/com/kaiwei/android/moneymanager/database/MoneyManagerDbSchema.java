@@ -1,14 +1,14 @@
 package com.kaiwei.android.moneymanager.database;
 
 public class MoneyManagerDbSchema {
-    public static final class CategoryTable{
+    /**public static final class CategoryTable{
         public static final String NAME = "income_category";
 
         public static final class Cols{
             public static final String NAME = "category_name";
             public static final String TYPE = "category_type";
         }
-    }
+    }**/
 
     public static final class IncomeTable{
         public static final String NAME = "income_record";
