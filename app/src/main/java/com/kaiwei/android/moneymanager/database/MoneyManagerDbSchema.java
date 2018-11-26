@@ -21,4 +21,12 @@ public class MoneyManagerDbSchema {
             public static final String CATEGORY= "income_category";
         }
     }
+
+    public static final class ExpensesTable{
+        public static final String NAME = "expenses_record";
+
+        public static final class Cols{
+            public static final String UUID = "expenses_uuid";
+        }
+    }
 }

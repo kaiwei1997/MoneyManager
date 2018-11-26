@@ -12,7 +12,7 @@ public class OverviewCursorWrapper extends CursorWrapper {
 
     public OverviewCursorWrapper(Cursor cursor){super(cursor);}
 
-    public Overview getOverview(){
+    public Overview getIncomeOverview(){
         String category = getString(getColumnIndexOrThrow(CATEGORY_INDEX));
         Double total = getDouble(getColumnIndexOrThrow(TOTAL_INDEX));
 

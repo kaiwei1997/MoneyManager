@@ -34,12 +34,12 @@ public class OverviewLab {
     public List<Overview> getOverview(){
         List<Overview> overviews = new ArrayList<>();
 
-        OverviewCursorWrapper cursor = queryOverview();
+        OverviewCursorWrapper cursor = queryIncomeOverview();
 
         try {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()){
-                overviews.add(cursor.getOverview());
+                overviews.add(cursor.getIncomeOverview());
                 cursor.moveToNext();
             }
         }finally {
@@ -48,7 +48,7 @@ public class OverviewLab {
         return overviews;
     }
 
-    private OverviewCursorWrapper queryOverview(){
+    private OverviewCursorWrapper queryIncomeOverview(){
         String query = "SELECT income_category, income_date, SUM(income_amount) AS total FROM income_record GROUP BY income_category ORDER BY income_date desc";
         Cursor cursor = mDatabase.rawQuery(query,null);
 
