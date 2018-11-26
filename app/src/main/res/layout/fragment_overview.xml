@@ -3,102 +3,135 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/chart_overview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></com.github.mikephil.charting.charts.PieChart>
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteY="81dp">
 
     <TextView
         android:id="@+id/tv_titleIncome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="59dp"
         android:text="@string/title_income"
         android:textColor="#000"
         android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_incomeAmount"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chart_overview" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_titleExpenses"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="54dp"
+        android:layout_marginTop="16dp"
         android:text="@string/title_expenses"
         android:textColor="#000"
         android:textSize="18dp"
-        app:layout_constraintEnd_toEndOf="@+id/chart_overview"
-        app:layout_constraintTop_toBottomOf="@+id/chart_overview" />
+        app:layout_constraintEnd_toEndOf="@+id/tv_expensesAmount"
+        app:layout_constraintStart_toStartOf="@+id/tv_expensesAmount"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_incomeDetail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/button"
+        android:text="@string/income_detail"
+        app:layout_constraintBottom_toTopOf="@+id/tv_breakDownTitle"
+        app:layout_constraintEnd_toStartOf="@+id/btn_expensesDetail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_incomeAmount" />
+
+    <Button
+        android:id="@+id/btn_expensesDetail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/button"
+        android:text="@string/expenses_detail"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_incomeDetail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_incomeDetail"
+        app:layout_constraintTop_toTopOf="@+id/btn_incomeDetail" />
 
     <TextView
         android:id="@+id/tv_incomeAmount"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="21dp"
         android:textSize="16dp"
-        app:layout_constraintStart_toStartOf="@+id/tv_titleIncome"
+        app:layout_constraintEnd_toStartOf="@+id/tv_expensesAmount"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_titleIncome"
         tools:text="0.00" />
 
     <TextView
         android:id="@+id/tv_expensesAmount"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="22dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="15dp"
         android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_titleExpenses"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_incomeAmount"
         app:layout_constraintTop_toBottomOf="@+id/tv_titleExpenses"
         tools:text="0.00" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="194dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="172dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="79dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="78dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_expenses"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/tv_expensesAmount">
 
     </android.support.v7.widget.RecyclerView>
 
     <Button
         android:id="@+id/btn_income"
-        android:layout_width="83dp"
-        android:layout_height="68dp"
-        android:layout_marginStart="66dp"
-        android:layout_marginTop="42dp"
-        android:layout_marginBottom="35dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="111dp"
         android:background="@drawable/ic_action_income"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_expenses"
+        app:layout_constraintEnd_toStartOf="@+id/btn_expenses"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+        app:layout_constraintTop_toTopOf="@+id/btn_expenses" />
 
     <Button
         android:id="@+id/btn_expenses"
-        android:layout_width="83dp"
-        android:layout_height="68dp"
-        android:layout_marginStart="86dp"
-        android:layout_marginTop="42dp"
-        android:layout_marginEnd="66dp"
-        android:layout_marginBottom="35dp"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="65dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/ic_action_expenses"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_income"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+        app:layout_constraintStart_toEndOf="@+id/btn_income" />
+
+    <TextView
+        android:id="@+id/tv_breakDownTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:text="@string/break_down"
+        android:textColor="#000"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintStart_toStartOf="@+id/recyclerView" />
 
 
 </android.support.constraint.ConstraintLayout>

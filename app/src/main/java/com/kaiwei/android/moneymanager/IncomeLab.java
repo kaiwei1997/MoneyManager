@@ -100,6 +100,8 @@ public class IncomeLab {
         return new IncomeCursorWrapper(cursor);
     }
 
+
+
     public static ContentValues getContentValues(Income income){
         ContentValues values = new ContentValues();
         values.put(IncomeTable.Cols.UUID, income.getIncomeId().toString());
