@@ -56,7 +56,7 @@ public class SplashScreen extends AppCompatActivity {
                         tv_welcome.animate()
                                 .translationY(-80)
                                 .alpha(1.0f)
-                                .setDuration(1000)
+                                .setDuration(500)
                                 .setListener(new AnimatorListenerAdapter() {
                                     @Override
                                     public void onAnimationEnd(Animator animation) {
@@ -65,7 +65,7 @@ public class SplashScreen extends AppCompatActivity {
                                         tv_intro.animate()
                                                 .translationY(-90)
                                                 .alpha(1.0f)
-                                                .setDuration(1000)
+                                                .setDuration(500)
                                                 .setListener(new AnimatorListenerAdapter() {
                                                     @Override
                                                     public void onAnimationEnd(Animator animation) {

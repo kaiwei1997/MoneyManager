@@ -22,6 +22,7 @@ public class OverviewFragment extends Fragment {
 
     private Button mIncomeButton;
     private TextView mIncomeTotal;
+    private Button mIncomeDetailButton;
 
     private Context mContext;
     private SQLiteDatabase mDatabase;
@@ -52,6 +53,15 @@ public class OverviewFragment extends Fragment {
 
         mIncomeTotal = (TextView)v.findViewById(R.id.tv_incomeAmount);
         queryIncomeTotal();
+
+        mIncomeButton = (Button)v.findViewById(R.id.btn_incomeDetail);
+        mIncomeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = IncomeListActivity.newIntent(getActivity());
+                startActivity(intent);
+            }
+        });
 
         return v;
     }
