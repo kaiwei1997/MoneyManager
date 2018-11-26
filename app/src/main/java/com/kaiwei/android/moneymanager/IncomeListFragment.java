@@ -140,7 +140,5 @@ public class IncomeListFragment extends Fragment {
         public int getItemCount() {
             return mIncomes.size();
         }
-
-
     }
 }

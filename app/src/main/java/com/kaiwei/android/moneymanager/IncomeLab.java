@@ -43,7 +43,7 @@ public class IncomeLab {
     public List<Income> getIncomes() {
         List<Income> incomes = new ArrayList<>();
 
-        IncomeCursorWrapper cursor = queryIncomes(null, null);
+        IncomeCursorWrapper cursor = queryIncomes(null, null,null);
 
         try{
             cursor.moveToFirst();
@@ -62,7 +62,7 @@ public class IncomeLab {
 
         IncomeCursorWrapper cursor = queryIncomes(
                 IncomeTable.Cols.UUID + " = ?",
-                new String[]{id.toString()}
+                new String[]{id.toString()},IncomeTable.Cols.DATE + " DESC "
         );
 
         try{
@@ -86,7 +86,7 @@ public class IncomeLab {
                 new String[]{uuidString});
     }
 
-    private IncomeCursorWrapper queryIncomes(String whereClause, String[] whereArgs){
+    private IncomeCursorWrapper queryIncomes(String whereClause, String[] whereArgs, String orderBy){
         Cursor cursor = mDatabase.query(
                 IncomeTable.NAME,
                 null,
@@ -94,7 +94,7 @@ public class IncomeLab {
                 whereArgs,
                 null,
                 null,
-                null
+                orderBy
         );
 
         return new IncomeCursorWrapper(cursor);
