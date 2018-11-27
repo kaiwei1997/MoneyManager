@@ -33,9 +33,9 @@ public class ExpenseListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_expenses_list,container, false);
+        View view = inflater.inflate(R.layout.fragment_expenses_list, container, false);
 
-        mExpenseRecyclerView = (RecyclerView)view
+        mExpenseRecyclerView = (RecyclerView) view
                 .findViewById(R.id.expenses_recycler_view);
         mExpenseRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -53,11 +53,22 @@ public class ExpenseListFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fargment_expense_list, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
+
+        switch (item.getItemId()) {
+            case R.id.new_expense:
+                Expense expense = new Expense();
+                ExpenseLab.get(getActivity()).addexpense(expense);
+                Intent intent = ExpensePagerActivity.newIntent(getActivity(), expense.getExpensesId());
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void updateUI() {
@@ -87,7 +98,7 @@ public class ExpenseListFragment extends Fragment {
 
             mCategoryTextView = (TextView) itemView.findViewById(R.id.expense_category);
             mDateTextView = (TextView) itemView.findViewById(R.id.expense_date);
-            mTimeTextView = (TextView)itemView.findViewById(R.id.expense_time);
+            mTimeTextView = (TextView) itemView.findViewById(R.id.expense_time);
             mAmountTextView = (TextView) itemView.findViewById(R.id.expense_amount);
         }
 
@@ -118,6 +129,7 @@ public class ExpenseListFragment extends Fragment {
         public void setExpenses(List<Expense> expenses) {
             mExpenses = expenses;
         }
+
         public ExpenseAdapter(List<Expense> expenses) {
             mExpenses = expenses;
         }

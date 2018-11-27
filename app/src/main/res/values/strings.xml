@@ -12,6 +12,7 @@
     <string name="title_income">Income</string>
     <string name="title_expenses">Expenses</string>
     <string name="new_Income">New Income</string>
+    <string name="new_expense">New Expense</string>
     <string name="break_down">Break Down</string>
     <string name="income_detail">Income Detail</string>
     <string name="expenses_detail">Expenses Detail</string>
