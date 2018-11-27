@@ -22,9 +22,11 @@ import java.util.List;
 public class OverviewFragment extends Fragment {
 
     private Button mIncomeButton;
+    private Button mExpensesButton;
     private TextView mIncomeTotal;
     private TextView mExpensesTotal;
     private Button mIncomeDetailButton;
+    private Button mExpensesDetailButton;
 
     private RecyclerView mOverviewRecyclerView;
 
@@ -53,6 +55,14 @@ public class OverviewFragment extends Fragment {
             }
         });
 
+        mExpensesButton = (Button) v.findViewById(R.id.btn_expenses);
+        mExpensesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         mIncomeTotal = (TextView) v.findViewById(R.id.tv_incomeAmount);
         updateIncomeTotal();
 
@@ -64,6 +74,15 @@ public class OverviewFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = IncomeListActivity.newIntent(getActivity());
+                startActivity(intent);
+            }
+        });
+
+        mExpensesDetailButton = (Button)v.findViewById(R.id.btn_expensesDetail);
+        mExpensesDetailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = ExpensesListActivity.newIntent(getActivity());
                 startActivity(intent);
             }
         });
