@@ -23,6 +23,7 @@ public class OverviewFragment extends Fragment {
 
     private Button mIncomeButton;
     private TextView mIncomeTotal;
+    private TextView mExpensesTotal;
     private Button mIncomeDetailButton;
 
     private RecyclerView mOverviewRecyclerView;
@@ -54,6 +55,9 @@ public class OverviewFragment extends Fragment {
 
         mIncomeTotal = (TextView) v.findViewById(R.id.tv_incomeAmount);
         updateIncomeTotal();
+
+        mExpensesTotal = (TextView)v.findViewById(R.id.tv_expensesAmount);
+        updateExpensesTotal();
 
         mIncomeDetailButton = (Button) v.findViewById(R.id.btn_incomeDetail);
         mIncomeDetailButton.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +108,14 @@ public class OverviewFragment extends Fragment {
 
         DecimalFormat precision = new DecimalFormat("RM 0.00");
         mIncomeTotal.setText(precision.format(incomeTotal));
+    }
+
+    private void updateExpensesTotal(){
+        OverviewLab overviewLab = OverviewLab.get(getActivity());
+        Double expensesTotal = overviewLab.getExpensesTotal();
+
+        DecimalFormat precision = new DecimalFormat("RM 0.00");
+        mExpensesTotal.setText(precision.format(expensesTotal));
     }
 
     private void updateOverview() {

@@ -36,16 +36,28 @@ public class OverviewLab {
         List<Overview> overviews = new ArrayList<>();
 
         OverviewCursorWrapper cursor = queryIncomeOverview();
+        OverviewCursorWrapper cursor1 = queryExpensesOverview();
 
         try {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()){
-                overviews.add(cursor.getIncomeOverview());
+                overviews.add(cursor.getOverview());
                 cursor.moveToNext();
             }
         }finally {
             cursor.close();
         }
+
+        try{
+            cursor1.moveToFirst();
+            while (!cursor1.isAfterLast()){
+                overviews.add(cursor1.getOverview());
+                cursor1.moveToNext();
+            }
+        }finally {
+            cursor1.close();
+        }
+
         return overviews;
     }
 
@@ -53,6 +65,20 @@ public class OverviewLab {
         Double total;
 
         OverviewCursorWrapper cursor = queryIncomeTotal();
+
+        try{
+            cursor.moveToFirst();
+            total = cursor.getDouble(0);
+        }finally {
+            cursor.close();
+        }
+        return total;
+    }
+
+    public Double getExpensesTotal(){
+        Double total;
+
+        OverviewCursorWrapper cursor = queryExpensesTotal();
 
         try{
             cursor.moveToFirst();
@@ -71,8 +97,22 @@ public class OverviewLab {
         return new OverviewCursorWrapper(cursor);
     }
 
+    private OverviewCursorWrapper queryExpensesOverview(){
+        String query = "SELECT expenses_category, expenses_date, SUM(expenses_amount) AS total FROM expenses_record GROUP BY expenses_category ORDER BY expenses_date desc";
+        Cursor cursor = mDatabase.rawQuery(query,null);
+
+        return new OverviewCursorWrapper(cursor);
+    }
+
     private OverviewCursorWrapper queryIncomeTotal(){
         String query = "SELECT SUM(income_amount) AS total FROM income_record";
+        Cursor cursor = mDatabase.rawQuery(query,null);
+
+        return new OverviewCursorWrapper(cursor);
+    }
+
+    private OverviewCursorWrapper queryExpensesTotal(){
+        String query = "SELECT SUM(expenses_amount) AS total FROM expenses_record";
         Cursor cursor = mDatabase.rawQuery(query,null);
 
         return new OverviewCursorWrapper(cursor);
