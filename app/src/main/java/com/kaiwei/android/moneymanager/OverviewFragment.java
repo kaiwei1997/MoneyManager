@@ -46,7 +46,7 @@ public class OverviewFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_overview, container, false);
 
-        mIncomeButton = (Button)v.findViewById(R.id.btn_income);
+        mIncomeButton = (Button) v.findViewById(R.id.btn_income);
         mIncomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,10 +58,10 @@ public class OverviewFragment extends Fragment {
             }
         });
 
-        mIncomeTotal = (TextView)v.findViewById(R.id.tv_incomeAmount);
-        queryIncomeTotal();
+        mIncomeTotal = (TextView) v.findViewById(R.id.tv_incomeAmount);
+        updateIncomeTotal();
 
-        mIncomeDetailButton = (Button)v.findViewById(R.id.btn_incomeDetail);
+        mIncomeDetailButton = (Button) v.findViewById(R.id.btn_incomeDetail);
         mIncomeDetailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,34 +80,29 @@ public class OverviewFragment extends Fragment {
     }
 
 
-
     @Override
     public void onResume() {
         super.onResume();
-        queryIncomeTotal();
+        updateIncomeTotal();
         updateOverview();
     }
 
-    private Cursor queryIncomeTotal(){
-        String query = "SELECT SUM(income_amount) AS total FROM income_record";
-        Cursor cursor = mDatabase.rawQuery(
-                query,null);
-        cursor.moveToFirst();
-        cursor.getInt(0);
+    private void updateIncomeTotal() {
+        OverviewLab overviewLab = OverviewLab.get(getActivity());
+        Double incomeTotal = overviewLab.getIncomeTotal();
 
         DecimalFormat precision = new DecimalFormat("RM 0.00");
-        mIncomeTotal.setText(precision.format(cursor.getInt(0)));
-        return cursor;
+        mIncomeTotal.setText(precision.format(incomeTotal));
     }
 
     private void updateOverview() {
         OverviewLab overviewLab = OverviewLab.get(getActivity());
         List<Overview> overviews = overviewLab.getOverview();
 
-        if(mOverviewAdapter == null){
+        if (mOverviewAdapter == null) {
             mOverviewAdapter = new OverviewAdapter(overviews);
             mOverviewRecyclerView.setAdapter(mOverviewAdapter);
-        }else {
+        } else {
             mOverviewAdapter.setOverviews(overviews);
             mOverviewAdapter.notifyDataSetChanged();
         }
@@ -118,11 +113,11 @@ public class OverviewFragment extends Fragment {
         private TextView mCategoryTextView;
         private TextView mTotalTextView;
 
-        public OverviewHolder(LayoutInflater layoutInflater, ViewGroup parent){
+        public OverviewHolder(LayoutInflater layoutInflater, ViewGroup parent) {
             super(layoutInflater.inflate(R.layout.list_item_overview, parent, false));
 
             mCategoryTextView = (TextView) itemView.findViewById(R.id.tv_categoryName);
-            mTotalTextView = (TextView)itemView.findViewById(R.id.tv_total);
+            mTotalTextView = (TextView) itemView.findViewById(R.id.tv_total);
         }
 
         public void bind(Overview overview) {
@@ -138,8 +133,13 @@ public class OverviewFragment extends Fragment {
 
         private List<Overview> mOverviews;
 
-        public void setOverviews(List<Overview> overviews){mOverviews = overviews;}
-        public OverviewAdapter(List<Overview> overviews){mOverviews = overviews;}
+        public void setOverviews(List<Overview> overviews) {
+            mOverviews = overviews;
+        }
+
+        public OverviewAdapter(List<Overview> overviews) {
+            mOverviews = overviews;
+        }
 
         @NonNull
         @Override

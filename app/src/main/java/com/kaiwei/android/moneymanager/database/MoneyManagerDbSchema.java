@@ -5,6 +5,7 @@ public class MoneyManagerDbSchema {
         public static final String NAME = "income_category";
 
         public static final class Cols{
+            public static final String UUID = "category_uuid";
             public static final String NAME = "category_name";
             public static final String TYPE = "category_type";
         }

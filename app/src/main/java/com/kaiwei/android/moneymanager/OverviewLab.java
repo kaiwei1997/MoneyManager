@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.kaiwei.android.moneymanager.database.MoneyManagerBaseHelper;
 import com.kaiwei.android.moneymanager.database.OverviewCursorWrapper;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,8 +49,30 @@ public class OverviewLab {
         return overviews;
     }
 
+    public Double getIncomeTotal(){
+        Double total;
+
+        OverviewCursorWrapper cursor = queryIncomeTotal();
+
+        try{
+            cursor.moveToFirst();
+            total = cursor.getDouble(0);
+        }finally {
+            cursor.close();
+        }
+        return total;
+    }
+
+
     private OverviewCursorWrapper queryIncomeOverview(){
         String query = "SELECT income_category, income_date, SUM(income_amount) AS total FROM income_record GROUP BY income_category ORDER BY income_date desc";
+        Cursor cursor = mDatabase.rawQuery(query,null);
+
+        return new OverviewCursorWrapper(cursor);
+    }
+
+    private OverviewCursorWrapper queryIncomeTotal(){
+        String query = "SELECT SUM(income_amount) AS total FROM income_record";
         Cursor cursor = mDatabase.rawQuery(query,null);
 
         return new OverviewCursorWrapper(cursor);

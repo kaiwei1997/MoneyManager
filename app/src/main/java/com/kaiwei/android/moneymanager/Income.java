@@ -24,10 +24,6 @@ public class Income {
         return mIncomeId;
     }
 
-    public void setIncomeId(UUID incomeId) {
-        mIncomeId = incomeId;
-    }
-
     public Date getIncomeDate() {
         return mIncomeDate;
     }
