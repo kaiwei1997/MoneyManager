@@ -54,22 +54,23 @@ public class CategoryLab {
         return categories;
     }
 
-    public Category getCategoryForType(String type){
+    public List<String> getCategoryForType(String type){
+        List<String> categories = new ArrayList<>();
+
         CategoryCursorWrapper cursor = queryCategories(
                 CategoryTable.Cols.TYPE + " = ? ",
                 new String[]{type}
         );
 
         try{
-            if(cursor.getCount() == 0){
-                return null;
-            }
-
             cursor.moveToFirst();
-            return cursor.getCategory();
+            while (!cursor.isAfterLast()){
+                categories.add(cursor.getCategory().getCategoryName());
+            }
         }finally {
             cursor.close();
         }
+        return categories;
     }
 
     public Category getCategory(UUID id){

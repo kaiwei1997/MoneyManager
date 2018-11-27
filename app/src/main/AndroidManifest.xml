@@ -23,6 +23,7 @@
             android:name=".IncomePagerActivity"
             android:parentActivityName=".IncomeListActivity"></activity>
         <activity android:name=".IncomeListActivity"></activity>
+        <activity android:name=".CategoryActivity"></activity>
     </application>
 
 </manifest>

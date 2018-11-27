@@ -29,13 +29,9 @@ public class IncomeFragment extends Fragment {
     private Spinner mCategorySpinner;
     private EditText mNoteField;
 
-    String[] category = new String[]{
-            "Deposit",
-            "Salary"
-    };
 
     private static final String ARG_INCOME_ID = "income_id";
-
+    private static final String CATEGORY_TYPE = "income";
 
     public static IncomeFragment newInstance(UUID incomeId) {
         Bundle args = new Bundle();
@@ -96,7 +92,8 @@ public class IncomeFragment extends Fragment {
         });
 
         mCategorySpinner = (Spinner) v.findViewById(R.id.spinner_incomeCategory);
-        final List<String> categoryList = new ArrayList<>(Arrays.asList(category));
+        CategoryLab categoryLab = CategoryLab.get(getActivity());
+        final List<String> categoryList = categoryLab.getCategoryForType(CATEGORY_TYPE);
 
         final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
                 getActivity(),android.R.layout.simple_spinner_item,categoryList);
