@@ -15,7 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class IncomeListFragment extends Fragment {
@@ -99,8 +101,10 @@ public class IncomeListFragment extends Fragment {
 
         public void bind(Income income) {
             mIncome = income;
+            DateFormat df = new SimpleDateFormat("E, MMMM dd, yyyy");
+            String formatDate = df.format(mIncome.getIncomeDate());
             mCategoryTextView.setText(mIncome.getIncomeCategory());
-            mDateTextView.setText(mIncome.getIncomeDate().toString());
+            mDateTextView.setText(formatDate);
             DecimalFormat precision = new DecimalFormat("RM 0.00");
             mAmountTextView.setText(precision.format(mIncome.getIncomeTotal()));
         }

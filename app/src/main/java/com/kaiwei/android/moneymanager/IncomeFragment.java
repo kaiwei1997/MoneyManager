@@ -1,9 +1,13 @@
 package com.kaiwei.android.moneymanager;
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -20,8 +24,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -35,6 +42,9 @@ public class IncomeFragment extends Fragment {
 
     private static final String ARG_INCOME_ID = "income_id";
     private static final String CATEGORY_TYPE = "Income";
+    private static final String DIALOG_DATE = "DialogDate";
+
+    private static final int REQUEST_DATE = 0;
 
     public static IncomeFragment newInstance(UUID incomeId) {
         Bundle args = new Bundle();
@@ -68,8 +78,17 @@ public class IncomeFragment extends Fragment {
         getActivity().setTitle(R.string.title_income);
 
         mDateButton = (Button) v.findViewById(R.id.income_date);
-        mDateButton.setText(mIncome.getIncomeDate().toString());
-        mDateButton.setEnabled(false);
+        updateDate();
+        mDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getFragmentManager();
+                DatePickerFragment dialog = DatePickerFragment
+                        .newInstance(mIncome.getIncomeDate());
+                dialog.setTargetFragment(IncomeFragment.this, REQUEST_DATE);
+                dialog.show(fm, DIALOG_DATE);
+            }
+        });
 
         mAmountField = (EditText) v.findViewById(R.id.income_total);
         mAmountField.setText(String.valueOf(mIncome.getIncomeTotal()));
@@ -135,6 +154,24 @@ public class IncomeFragment extends Fragment {
         });
 
         return v;
+    }
+
+    private void updateDate() {
+        DateFormat df = new SimpleDateFormat("E, MMMM dd, yyyy");
+        mDateButton.setText(df.format(mIncome.getIncomeDate()));
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode != Activity.RESULT_OK){
+            return;
+        }
+        if(requestCode == REQUEST_DATE){
+            Date date = (Date) data
+                    .getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+            mIncome.setIncomeDate(date);
+            updateDate();
+        }
     }
 
     @Override
