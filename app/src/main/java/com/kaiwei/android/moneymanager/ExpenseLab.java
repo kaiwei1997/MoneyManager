@@ -9,8 +9,10 @@ import com.kaiwei.android.moneymanager.database.ExpenseCursorWrapper;
 import com.kaiwei.android.moneymanager.database.MoneyManagerBaseHelper;
 import com.kaiwei.android.moneymanager.database.MoneyManagerDbSchema.ExpenseTable;
 
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class ExpenseLab {
     private static ExpenseLab sExpensesLab;
@@ -61,6 +63,33 @@ public class ExpenseLab {
         }
 
         return expenses;
+    }
+
+    public Expense getExpense(UUID id){
+        ExpenseCursorWrapper cursor = queryExpenses(
+                ExpenseTable.Cols.UUID + " = ?",
+                new String[]{id.toString()}
+        );
+
+        try{
+            if(cursor.getCount() == 0){
+                return null;
+            }
+
+            cursor.moveToFirst();
+            return cursor.getExpense();
+        }finally {
+            cursor.close();
+        }
+    }
+
+    public void updateExpense(Expense expense){
+        String uuidString = expense.getExpensesId().toString();
+        ContentValues values = getContentValues(expense);
+
+        mDatabase.update(ExpenseTable.NAME, values,
+                ExpenseTable.Cols.UUID + "= ?",
+                new String[]{uuidString});
     }
 
     private ExpenseCursorWrapper queryExpenses(String whereClause, String[] whereArgs){
