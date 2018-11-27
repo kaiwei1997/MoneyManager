@@ -22,7 +22,7 @@ public class CategoryFragment extends Fragment {
     private static final String CATEGORY_TYPE_EXPEMSES = "expenses";
     private Category mCategory;
     private EditText mCategoryName;
-    private RadioGroup mCategoryTypewRadioGroup;
+    private RadioGroup mCategoryTypeRadioGroup;
     private RadioButton mCategoryType;
 
     public static CategoryFragment newInstance(UUID categoryId) {
@@ -73,17 +73,12 @@ public class CategoryFragment extends Fragment {
 
             }
         });
-        mCategoryTypewRadioGroup = (RadioGroup) v.findViewById(R.id.rg_categoryType);
 
-       if (mCategory.getCategoryType().equals("Income")) {
-            mCategoryTypewRadioGroup.check(R.id.income_radio_button);
-        } else if (mCategory.getCategoryType().equals("Expenses")) {
-            mCategoryTypewRadioGroup.check(R.id.expenses_radio_button);
-        }
-        mCategoryTypewRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        mCategoryTypeRadioGroup = (RadioGroup) v.findViewById(R.id.rg_categoryType);
+        mCategoryTypeRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                mCategoryType = (RadioButton) v.findViewById(mCategoryTypewRadioGroup.getCheckedRadioButtonId());
+                mCategoryType = (RadioButton) v.findViewById(mCategoryTypeRadioGroup.getCheckedRadioButtonId());
                 mCategory.setCategoryType(mCategoryType.getText().toString());
             }
         });

@@ -38,6 +38,14 @@ public class CategoryLab {
         mDatabase.insert(CategoryTable.NAME, null, values);
     }
 
+    public void removeCategory(Category c){
+        String uuidString = c.getCategoryId().toString();
+
+        mDatabase.delete(CategoryTable.NAME,
+                CategoryTable.Cols.UUID + " = ?",
+                new String[]{uuidString});
+    }
+
     public List<Category> getCategories(){
         List<Category> categories = new ArrayList<>();
 
