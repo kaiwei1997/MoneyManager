@@ -23,4 +23,6 @@
     <string name="expenses">Expenses</string>
     <string name="save">Save</string>
     <string name="delete_category">Delete Item</string>
+    <string name="date_picker_title">Date of Crime:</string>
+    <string name="time_picker_title">Time of Crime:</string>
 </resources>
