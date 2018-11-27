@@ -87,7 +87,7 @@ public class IncomeFragment extends Fragment {
             }
         });
 
-        mAmountField = (EditText) v.findViewById(R.id.income_total);
+        mAmountField = (EditText) v.findViewById(R.id.expense_total);
         mAmountField.setText(String.valueOf(mIncome.getIncomeTotal()));
         mAmountField.addTextChangedListener(new TextWatcher() {
             @Override
@@ -110,7 +110,7 @@ public class IncomeFragment extends Fragment {
             }
         });
 
-        mCategorySpinner = (Spinner) v.findViewById(R.id.spinner_incomeCategory);
+        mCategorySpinner = (Spinner) v.findViewById(R.id.spinner_expenseCategory);
         CategoryLab categoryLab = CategoryLab.get(getActivity());
         final List<String> categoryList = categoryLab.getCategoryForType(CATEGORY_TYPE);
 
@@ -131,7 +131,7 @@ public class IncomeFragment extends Fragment {
             }
         });
 
-        mNoteField = (EditText) v.findViewById(R.id.income_note);
+        mNoteField = (EditText) v.findViewById(R.id.expense_note);
         mNoteField.setText(mIncome.getIncomeNote());
         mNoteField.addTextChangedListener(new TextWatcher() {
             @Override

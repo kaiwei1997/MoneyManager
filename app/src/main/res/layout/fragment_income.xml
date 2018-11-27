@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_currency"
         android:layout_width="66dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
@@ -29,13 +29,13 @@
         android:text="@string/currency"
         android:textColor="#000"
         android:textSize="28sp"
-        app:layout_constraintBottom_toBottomOf="@+id/income_total"
-        app:layout_constraintEnd_toStartOf="@+id/income_total"
+        app:layout_constraintBottom_toBottomOf="@+id/expense_total"
+        app:layout_constraintEnd_toStartOf="@+id/expense_total"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/income_total" />
+        app:layout_constraintTop_toTopOf="@+id/expense_total" />
 
     <EditText
-        android:id="@+id/income_total"
+        android:id="@+id/expense_total"
         android:layout_width="0dp"
         android:layout_height="49dp"
         android:layout_marginTop="16dp"
@@ -48,7 +48,7 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/tv_chooseCategory"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/tv_currency"
         app:layout_constraintTop_toBottomOf="@+id/expenses_date" tools:targetApi="o"/>
 
     <TextView
@@ -66,20 +66,20 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/spinner_incomeCategory"
+        android:id="@+id/spinner_expenseCategory"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/income_note"
+        app:layout_constraintBottom_toTopOf="@+id/expense_note"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_chooseCategory" />
 
     <EditText
-        android:id="@+id/income_note"
+        android:id="@+id/expense_note"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

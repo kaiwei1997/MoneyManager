@@ -32,13 +32,13 @@
         android:layout_marginBottom="19dp"
         android:drawableStart="@drawable/ic_time"
         android:textColor="@color/colorPrimaryDark"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@+id/tv_currency"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/expenses_date" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_currency"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -47,12 +47,12 @@
         android:textColor="#000"
         android:textSize="28sp"
         app:layout_constraintBottom_toTopOf="@+id/tv_chooseCategory"
-        app:layout_constraintEnd_toStartOf="@+id/income_total"
+        app:layout_constraintEnd_toStartOf="@+id/expense_total"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/expenses_time" />
 
     <EditText
-        android:id="@+id/income_total"
+        android:id="@+id/expense_total"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="15dp"
@@ -65,7 +65,7 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/tv_chooseCategory"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/tv_currency"
         app:layout_constraintTop_toBottomOf="@+id/expenses_time"
         tools:targetApi="o" />
 
@@ -79,25 +79,51 @@
         android:text="@string/choose_category"
         android:textColor="#000"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/spinner_incomeCategory"
+        app:layout_constraintBottom_toTopOf="@+id/spinner_expenseCategory"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_currency" />
 
     <Spinner
-        android:id="@+id/spinner_incomeCategory"
+        android:id="@+id/spinner_expenseCategory"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="66dp"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/btn_addPhoto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_chooseCategory" />
 
+    <ImageView
+        android:id="@+id/iv_expensePhoto"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="49dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="53dp"
+        app:layout_constraintBottom_toBottomOf="@+id/expense_note"
+        app:layout_constraintEnd_toStartOf="@+id/btn_addPhoto"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/spinner_expenseCategory"
+        app:srcCompat="@color/colorPrimaryDark" />
+
+    <Button
+        android:id="@+id/btn_addPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="57dp"
+        android:layout_marginBottom="69dp"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/expense_note"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_expensePhoto"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_expenseCategory" />
+
     <EditText
-        android:id="@+id/income_note"
+        android:id="@+id/expense_note"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -110,33 +136,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintTop_toBottomOf="@+id/btn_addPhoto"
         tools:targetApi="o" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="49dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="53dp"
-        app:layout_constraintBottom_toBottomOf="@+id/income_note"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/spinner_incomeCategory"
-        app:srcCompat="@color/colorPrimaryDark" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="57dp"
-        android:layout_marginBottom="69dp"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/income_note"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_incomeCategory" />
 
 </android.support.constraint.ConstraintLayout>
