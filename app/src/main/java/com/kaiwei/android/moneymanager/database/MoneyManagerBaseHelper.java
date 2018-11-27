@@ -33,10 +33,11 @@ public class MoneyManagerBaseHelper extends SQLiteOpenHelper {
                 CategoryTable.Cols.TYPE +
                 ")"
         );
+
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
     }
 }

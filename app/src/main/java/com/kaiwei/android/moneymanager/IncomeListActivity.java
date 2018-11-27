@@ -6,8 +6,8 @@ import android.support.v4.app.Fragment;
 
 public class IncomeListActivity extends SingleFragmentActivity {
 
-    public static Intent newIntent(Context packageContaxt){
-        Intent intent = new Intent(packageContaxt, IncomeListActivity.class);
+    public static Intent newIntent(Context packageContext){
+        Intent intent = new Intent(packageContext, IncomeListActivity.class);
         return intent;
     }
 
