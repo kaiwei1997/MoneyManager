@@ -39,6 +39,14 @@ public class IncomeLab {
         mDatabase.insert(IncomeTable.NAME, null, values);
     }
 
+    public void removeIncome(Income i){
+        String uuidString = i.getIncomeId().toString();
+
+        mDatabase.delete(IncomeTable.NAME,
+                IncomeTable.Cols.UUID + " = ?",
+                new String[]{uuidString});
+    }
+
     public List<Income> getIncomes() {
         List<Income> incomes = new ArrayList<>();
 
