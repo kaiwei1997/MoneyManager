@@ -28,6 +28,12 @@ public class MoneyManagerDbSchema {
 
         public static final class Cols{
             public static final String UUID = "expenses_uuid";
+            public static final String DATE = "expenses_date";
+            public static final String TIME = "expenses_time";
+            public static final String AMOUNT = "expenses_amount";
+            public static final String CATEGORY = "expenses_category";
+            public static final String PHOTO = "expenses_photo_file";
+            public static final String NOTE = "expenses_note";
         }
     }
 }
