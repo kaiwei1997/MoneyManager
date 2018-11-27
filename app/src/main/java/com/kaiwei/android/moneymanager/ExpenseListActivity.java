@@ -4,15 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 
-public class ExpensesListActivity extends SingleFragmentActivity {
+public class ExpenseListActivity extends SingleFragmentActivity {
 
     public static Intent newIntent(Context packageContext){
-        Intent intent = new Intent(packageContext, ExpensesListActivity.class);
+        Intent intent = new Intent(packageContext, ExpenseListActivity.class);
         return intent;
     }
 
     @Override
     protected Fragment createFragment() {
-        return new ExpensesListFragment();
+        return new ExpenseListFragment();
     }
 }

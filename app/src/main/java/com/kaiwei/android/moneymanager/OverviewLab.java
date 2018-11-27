@@ -98,7 +98,7 @@ public class OverviewLab {
     }
 
     private OverviewCursorWrapper queryExpensesOverview(){
-        String query = "SELECT expenses_category, expenses_date, SUM(expenses_amount) AS total FROM expenses_record GROUP BY expenses_category ORDER BY expenses_date desc";
+        String query = "SELECT expenses_category, expenses_date, SUM(expenses_amount) AS total FROM expense_record GROUP BY expenses_category ORDER BY expenses_date desc";
         Cursor cursor = mDatabase.rawQuery(query,null);
 
         return new OverviewCursorWrapper(cursor);
@@ -112,7 +112,7 @@ public class OverviewLab {
     }
 
     private OverviewCursorWrapper queryExpensesTotal(){
-        String query = "SELECT SUM(expenses_amount) AS total FROM expenses_record";
+        String query = "SELECT SUM(expenses_amount) AS total FROM expense_record";
         Cursor cursor = mDatabase.rawQuery(query,null);
 
         return new OverviewCursorWrapper(cursor);

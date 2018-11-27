@@ -82,7 +82,7 @@ public class OverviewFragment extends Fragment {
         mExpensesDetailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = ExpensesListActivity.newIntent(getActivity());
+                Intent intent = ExpenseListActivity.newIntent(getActivity());
                 startActivity(intent);
             }
         });

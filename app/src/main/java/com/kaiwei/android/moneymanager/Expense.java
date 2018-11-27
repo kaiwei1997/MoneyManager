@@ -1,10 +1,9 @@
 package com.kaiwei.android.moneymanager;
 
-import java.io.File;
 import java.util.Date;
 import java.util.UUID;
 
-public class Expenses {
+public class Expense {
 
     private UUID mExpensesId;
     private Date mExpensesDate;
@@ -14,11 +13,11 @@ public class Expenses {
     private String mExpensesPhotoFile;
     private String mExpensesNote;
 
-    public Expenses(){
+    public Expense(){
         this(UUID.randomUUID());
     }
 
-    public Expenses(UUID id){
+    public Expense(UUID id){
         mExpensesId = id;
         mExpensesDate =  new Date();
         mExpensesTime = new Date();

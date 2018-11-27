@@ -4,10 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.kaiwei.android.moneymanager.Category;
-import com.kaiwei.android.moneymanager.Expenses;
 import com.kaiwei.android.moneymanager.database.MoneyManagerDbSchema.CategoryTable;
-import com.kaiwei.android.moneymanager.database.MoneyManagerDbSchema.ExpensesTable;
+import com.kaiwei.android.moneymanager.database.MoneyManagerDbSchema.ExpenseTable;
 import com.kaiwei.android.moneymanager.database.MoneyManagerDbSchema.IncomeTable;
 
 public class MoneyManagerBaseHelper extends SQLiteOpenHelper {
@@ -38,15 +36,15 @@ public class MoneyManagerBaseHelper extends SQLiteOpenHelper {
                 ")"
         );
 
-        db.execSQL("create table " + ExpensesTable.NAME + "(" +
+        db.execSQL("create table " + ExpenseTable.NAME + "(" +
                 "_id integer primary key autoincrement, " +
-                ExpensesTable.Cols.UUID + ", " +
-                ExpensesTable.Cols.DATE + ", " +
-                ExpensesTable.Cols.TIME + ", " +
-                ExpensesTable.Cols.AMOUNT + ", " +
-                ExpensesTable.Cols.CATEGORY + ", " +
-                ExpensesTable.Cols.PHOTO + ", " +
-                ExpensesTable.Cols.NOTE +
+                ExpenseTable.Cols.UUID + ", " +
+                ExpenseTable.Cols.DATE + ", " +
+                ExpenseTable.Cols.TIME + ", " +
+                ExpenseTable.Cols.AMOUNT + ", " +
+                ExpenseTable.Cols.CATEGORY + ", " +
+                ExpenseTable.Cols.PHOTO + ", " +
+                ExpenseTable.Cols.NOTE +
                 ")"
         );
     }
