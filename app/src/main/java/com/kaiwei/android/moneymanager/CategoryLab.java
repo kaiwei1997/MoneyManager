@@ -67,6 +67,7 @@ public class CategoryLab {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()){
                 categories.add(cursor.getCategory().getCategoryName());
+                cursor.moveToNext();
             }
         }finally {
             cursor.close();
@@ -93,7 +94,7 @@ public class CategoryLab {
     }
 
     public void updateCategory(Category category){
-        String uuidString = category.toString();
+        String uuidString = category.getCategoryId().toString();
         ContentValues values = getContentValues(category);
 
         mDatabase.update(CategoryTable.NAME, values,

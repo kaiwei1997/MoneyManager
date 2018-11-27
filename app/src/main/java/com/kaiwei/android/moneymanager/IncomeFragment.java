@@ -31,7 +31,7 @@ public class IncomeFragment extends Fragment {
 
 
     private static final String ARG_INCOME_ID = "income_id";
-    private static final String CATEGORY_TYPE = "income";
+    private static final String CATEGORY_TYPE = "Income";
 
     public static IncomeFragment newInstance(UUID incomeId) {
         Bundle args = new Bundle();

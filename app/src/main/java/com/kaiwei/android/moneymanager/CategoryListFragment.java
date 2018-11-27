@@ -94,7 +94,7 @@ public class CategoryListFragment extends Fragment {
 
         public void bind(Category category) {
             mCategory = category;
-            mCategoryTypeTextView.setText(mCategory.getCategoryName());
+            mCategoryNameTextView.setText(mCategory.getCategoryName());
             mCategoryTypeTextView.setText(mCategory.getCategoryType());
         }
 

@@ -53,7 +53,7 @@ public class CategoryFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_category, container, false);
+        final View v = inflater.inflate(R.layout.fragment_category, container, false);
         getActivity().setTitle(R.string.category);
 
         mCategoryName = (EditText)v.findViewById(R.id.et_categoryName);
@@ -75,7 +75,14 @@ public class CategoryFragment extends Fragment {
             }
         });
         mCategoryTypewRadioGroup = (RadioGroup)v.findViewById(R.id.rg_categoryType);
-        mCategoryType = (RadioButton)v.findViewById(mCategoryTypewRadioGroup.getCheckedRadioButtonId());
+        //mCategoryTypewRadioGroup.check();
+        mCategoryTypewRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                mCategoryType = (RadioButton)v.findViewById(mCategoryTypewRadioGroup.getCheckedRadioButtonId());
+                mCategory.setCategoryType(mCategoryType.getText().toString());
+            }
+        });
 
         return v;
     }
