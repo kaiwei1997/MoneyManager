@@ -44,26 +44,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_categoryName" />
 
-    <Button
-        android:id="@+id/btn_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/cancel"
-        app:layout_constraintEnd_toStartOf="@+id/btn_saveCategory"
-        app:layout_constraintTop_toBottomOf="@+id/rg_categoryType" />
-
-    <Button
-        android:id="@+id/btn_saveCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/save"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_categoryName" />
-
     <RadioGroup
         android:id="@+id/rg_categoryType"
         android:layout_width="wrap_content"

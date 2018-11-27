@@ -91,7 +91,7 @@ public class OverviewFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.category:
-                Intent intent = new Intent(getActivity(), CategoryActivity.class);
+                Intent intent = new Intent(getActivity(), CategoryListActivity.class);
                 startActivity(intent);
             default:
                 return super.onOptionsItemSelected(item);

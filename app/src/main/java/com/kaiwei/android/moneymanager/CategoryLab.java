@@ -47,6 +47,7 @@ public class CategoryLab {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()){
                 categories.add(cursor.getCategory());
+                cursor.moveToNext();
             }
         }finally {
             cursor.close();
@@ -116,6 +117,7 @@ public class CategoryLab {
 
     public static ContentValues getContentValues(Category category){
         ContentValues values = new ContentValues();
+        values.put(CategoryTable.Cols.UUID, category.getCategoryId().toString());
         values.put(CategoryTable.Cols.NAME, category.getCategoryName());
         values.put(CategoryTable.Cols.TYPE, category.getCategoryType());
 

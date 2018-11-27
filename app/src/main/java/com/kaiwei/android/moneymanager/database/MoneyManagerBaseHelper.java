@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.kaiwei.android.moneymanager.Category;
 import com.kaiwei.android.moneymanager.database.MoneyManagerDbSchema.CategoryTable;
 import com.kaiwei.android.moneymanager.database.MoneyManagerDbSchema.IncomeTable;
 
@@ -29,6 +30,7 @@ public class MoneyManagerBaseHelper extends SQLiteOpenHelper {
 
         db.execSQL("create table " + CategoryTable.NAME + "(" +
                 "_id integer primary key autoincrement, " +
+                CategoryTable.Cols.UUID + ", " +
                 CategoryTable.Cols.NAME + ", " +
                 CategoryTable.Cols.TYPE +
                 ")"
