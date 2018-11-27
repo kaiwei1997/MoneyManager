@@ -1,7 +1,6 @@
 package com.kaiwei.android.moneymanager;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -26,8 +25,6 @@ import android.widget.Spinner;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -77,7 +74,7 @@ public class IncomeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_income, container, false);
         getActivity().setTitle(R.string.title_income);
 
-        mDateButton = (Button) v.findViewById(R.id.income_date);
+        mDateButton = (Button) v.findViewById(R.id.expenses_date);
         updateDate();
         mDateButton.setOnClickListener(new View.OnClickListener() {
             @Override

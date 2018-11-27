@@ -12,35 +12,52 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="14dp"
         android:drawableStart="@drawable/ic_calendar"
         android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toTopOf="@+id/expenses_time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/expenses_time"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="19dp"
+        android:drawableStart="@drawable/ic_time"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/expenses_date" />
+
     <TextView
         android:id="@+id/textView"
-        android:layout_width="66dp"
-        android:layout_height="45dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="7dp"
         android:text="@string/currency"
         android:textColor="#000"
         android:textSize="28sp"
-        app:layout_constraintBottom_toBottomOf="@+id/income_total"
+        app:layout_constraintBottom_toTopOf="@+id/tv_chooseCategory"
         app:layout_constraintEnd_toStartOf="@+id/income_total"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/income_total" />
+        app:layout_constraintTop_toBottomOf="@+id/expenses_time" />
 
     <EditText
         android:id="@+id/income_total"
         android:layout_width="0dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="7dp"
         android:hint="@string/amount_hint"
         android:importantForAutofill="no"
         android:inputType="numberDecimal"
@@ -49,31 +66,32 @@
         app:layout_constraintBottom_toTopOf="@+id/tv_chooseCategory"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/expenses_date" tools:targetApi="o"/>
+        app:layout_constraintTop_toBottomOf="@+id/expenses_time"
+        tools:targetApi="o" />
 
     <TextView
         android:id="@+id/tv_chooseCategory"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="145dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="12dp"
         android:text="@string/choose_category"
         android:textColor="#000"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/spinner_incomeCategory"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Spinner
         android:id="@+id/spinner_incomeCategory"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="5dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/income_note"
+        android:layout_marginBottom="66dp"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_chooseCategory" />
@@ -84,16 +102,41 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:ems="10"
         android:hint="@string/note_hint"
         android:importantForAutofill="no"
         android:inputType="textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.498" tools:targetApi="o"/>
+        app:layout_constraintTop_toBottomOf="@+id/button2"
+        tools:targetApi="o" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="49dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="53dp"
+        app:layout_constraintBottom_toBottomOf="@+id/income_note"
+        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/spinner_incomeCategory"
+        app:srcCompat="@color/colorPrimaryDark" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="57dp"
+        android:layout_marginBottom="69dp"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/income_note"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_incomeCategory" />
 
 </android.support.constraint.ConstraintLayout>
