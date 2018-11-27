@@ -1,9 +1,6 @@
 package com.kaiwei.android.moneymanager;
 
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,8 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.kaiwei.android.moneymanager.database.MoneyManagerBaseHelper;
-
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -29,16 +24,11 @@ public class OverviewFragment extends Fragment {
 
     private RecyclerView mOverviewRecyclerView;
 
-    private Context mContext;
-    private SQLiteDatabase mDatabase;
-
     private OverviewAdapter mOverviewAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContext = getActivity().getApplicationContext();
-        mDatabase = new MoneyManagerBaseHelper(mContext).getWritableDatabase();
     }
 
     @Nullable
