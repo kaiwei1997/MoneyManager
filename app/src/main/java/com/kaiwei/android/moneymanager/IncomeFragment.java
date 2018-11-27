@@ -163,7 +163,7 @@ public class IncomeFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode != Activity.RESULT_OK){
+        if(resultCode != Activity.RESULT_OK){
             return;
         }
         if(requestCode == REQUEST_DATE){

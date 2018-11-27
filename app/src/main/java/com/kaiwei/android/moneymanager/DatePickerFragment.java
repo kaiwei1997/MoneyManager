@@ -19,7 +19,7 @@ import java.util.GregorianCalendar;
 
 public class DatePickerFragment extends DialogFragment {
     public static final String EXTRA_DATE =
-            "com.kaiwei.android.moneymanager.date";
+            "com.kaiwei.android.moneymanager.incomedate";
     private static final String ARG_DATE = "date";
     private DatePicker mDatePicker;
     public static DatePickerFragment newInstance(Date date) {
@@ -35,6 +35,7 @@ public class DatePickerFragment extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         Date date = (Date) getArguments().getSerializable(ARG_DATE);
         Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
