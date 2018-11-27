@@ -17,14 +17,13 @@ import java.util.UUID;
 
 public class CategoryFragment extends Fragment {
 
+    private static final String ARG_CATEGORY_ID = "category_id";
+    private static final String CATEGORY_TYPE_INCOME = "income";
+    private static final String CATEGORY_TYPE_EXPEMSES = "expenses";
     private Category mCategory;
     private EditText mCategoryName;
     private RadioGroup mCategoryTypewRadioGroup;
     private RadioButton mCategoryType;
-
-    private static final String ARG_CATEGORY_ID = "category_id";
-    private static final String CATEGORY_TYPE_INCOME = "income";
-    private static final String CATEGORY_TYPE_EXPEMSES = "expenses";
 
     public static CategoryFragment newInstance(UUID categoryId) {
         Bundle args = new Bundle();
@@ -56,7 +55,7 @@ public class CategoryFragment extends Fragment {
         final View v = inflater.inflate(R.layout.fragment_category, container, false);
         getActivity().setTitle(R.string.category);
 
-        mCategoryName = (EditText)v.findViewById(R.id.et_categoryName);
+        mCategoryName = (EditText) v.findViewById(R.id.et_categoryName);
         mCategoryName.setText(mCategory.getCategoryName());
         mCategoryName.addTextChangedListener(new TextWatcher() {
             @Override
@@ -74,12 +73,17 @@ public class CategoryFragment extends Fragment {
 
             }
         });
-        mCategoryTypewRadioGroup = (RadioGroup)v.findViewById(R.id.rg_categoryType);
-        //mCategoryTypewRadioGroup.check();
+        mCategoryTypewRadioGroup = (RadioGroup) v.findViewById(R.id.rg_categoryType);
+
+       if (mCategory.getCategoryType().equals("Income")) {
+            mCategoryTypewRadioGroup.check(R.id.income_radio_button);
+        } else if (mCategory.getCategoryType().equals("Expenses")) {
+            mCategoryTypewRadioGroup.check(R.id.expenses_radio_button);
+        }
         mCategoryTypewRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                mCategoryType = (RadioButton)v.findViewById(mCategoryTypewRadioGroup.getCheckedRadioButtonId());
+                mCategoryType = (RadioButton) v.findViewById(mCategoryTypewRadioGroup.getCheckedRadioButtonId());
                 mCategory.setCategoryType(mCategoryType.getText().toString());
             }
         });
