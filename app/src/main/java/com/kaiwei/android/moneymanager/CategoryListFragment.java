@@ -61,6 +61,7 @@ public class CategoryListFragment extends Fragment {
                 CategoryLab.get(getActivity()).addCategory(category);
                 Intent intent = CategoryPagerActivity.newIntent(getActivity(), category.getCategoryId());
                 startActivity(intent);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

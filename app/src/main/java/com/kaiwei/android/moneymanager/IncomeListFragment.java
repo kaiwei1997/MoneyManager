@@ -62,6 +62,7 @@ public class IncomeListFragment extends Fragment {
                 IncomeLab.get(getActivity()).addIncome(income);
                 Intent intent = IncomePagerActivity.newIntent(getActivity(), income.getIncomeId());
                 startActivity(intent);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
