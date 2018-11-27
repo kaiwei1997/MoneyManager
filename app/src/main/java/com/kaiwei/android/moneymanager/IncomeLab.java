@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.kaiwei.android.moneymanager.database.IncomeCursorWrapper;
 import com.kaiwei.android.moneymanager.database.MoneyManagerBaseHelper;
-import com.kaiwei.android.moneymanager.database.MoneyManagerDbSchema;
 import com.kaiwei.android.moneymanager.database.MoneyManagerDbSchema.IncomeTable;
 
 import java.util.ArrayList;
@@ -43,7 +42,7 @@ public class IncomeLab {
     public List<Income> getIncomes() {
         List<Income> incomes = new ArrayList<>();
 
-        IncomeCursorWrapper cursor = queryIncomes(null, null,null);
+        IncomeCursorWrapper cursor = queryIncomes(null, null);
 
         try{
             cursor.moveToFirst();
@@ -62,7 +61,7 @@ public class IncomeLab {
 
         IncomeCursorWrapper cursor = queryIncomes(
                 IncomeTable.Cols.UUID + " = ?",
-                new String[]{id.toString()},IncomeTable.Cols.DATE + " DESC "
+                new String[]{id.toString()}
         );
 
         try{
@@ -86,7 +85,7 @@ public class IncomeLab {
                 new String[]{uuidString});
     }
 
-    private IncomeCursorWrapper queryIncomes(String whereClause, String[] whereArgs, String orderBy){
+    private IncomeCursorWrapper queryIncomes(String whereClause, String[] whereArgs){
         Cursor cursor = mDatabase.query(
                 IncomeTable.NAME,
                 null,
@@ -94,7 +93,7 @@ public class IncomeLab {
                 whereArgs,
                 null,
                 null,
-                orderBy
+                null
         );
 
         return new IncomeCursorWrapper(cursor);

@@ -32,8 +32,6 @@ public class CategoryLab {
         mDatabase.insert(CategoryTable.NAME, null, values);
     }
 
-
-
     public static ContentValues getContentValues(Category category){
         ContentValues values = new ContentValues();
         values.put(CategoryTable.Cols.NAME, category.getCategoryName());
