@@ -21,8 +21,8 @@ import java.util.UUID;
 public class CategoryFragment extends Fragment {
 
     private static final String ARG_CATEGORY_ID = "category_id";
-    private static final String CATEGORY_TYPE_INCOME = "income";
-    private static final String CATEGORY_TYPE_EXPEMSES = "expenses";
+    private static final String CATEGORY_TYPE_INCOME = "Income";
+    private static final String CATEGORY_TYPE_EXPENSE = "Expense";
     private Category mCategory;
     private EditText mCategoryName;
     private RadioGroup mCategoryTypeRadioGroup;
@@ -79,6 +79,14 @@ public class CategoryFragment extends Fragment {
         });
 
         mCategoryTypeRadioGroup = (RadioGroup) v.findViewById(R.id.rg_categoryType);
+        String selectedValue = mCategory.getCategoryType();
+        if (selectedValue!=null){
+            if(selectedValue.equals(CATEGORY_TYPE_INCOME)){
+                mCategoryTypeRadioGroup.check(R.id.income_radio_button);
+            }else if(selectedValue.equals(CATEGORY_TYPE_EXPENSE)){
+                mCategoryTypeRadioGroup.check(R.id.expenses_radio_button);
+            }
+        }
         mCategoryTypeRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
