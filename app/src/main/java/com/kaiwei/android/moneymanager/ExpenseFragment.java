@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -280,6 +282,11 @@ public class ExpenseFragment extends Fragment {
             } else if(requestCode == TAKE_PHOTO_REQUEST){
                 Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                 mExpenseImageView.setImageBitmap(bitmap);
+                mExpense.setExpensesPhotoFile(Utils.getBytes(bitmap));
+            } else if(requestCode == SELECT_IMAGE_REQUEST){
+                Uri selectedImage = data.getData();
+                mExpenseImageView.setImageURI(selectedImage);
+                Bitmap bitmap = ((BitmapDrawable) mExpenseImageView.getDrawable()).getBitmap();
                 mExpense.setExpensesPhotoFile(Utils.getBytes(bitmap));
             }
         }
