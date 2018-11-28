@@ -317,6 +317,7 @@ public class ExpenseFragment extends Fragment implements CalcDialog.CalcDialogCa
         if(requestCode == CALC_REQUEST_CODE) {
             DecimalFormat precision = new DecimalFormat("0.00");
             mAmountField.setText(precision.format(Double.valueOf(value.toPlainString())));
+            mExpense.setExpensesTotal(Double.valueOf(value.toPlainString()));
         }
     }
 
