@@ -8,6 +8,9 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -91,7 +94,7 @@ public class ExpenseFragment extends Fragment {
             }
         });
 
-        mAmountField = (EditText)view.findViewById(R.id.expense_total);
+        mAmountField = (EditText) view.findViewById(R.id.expense_total);
         DecimalFormat precision = new DecimalFormat("0.00");
         mAmountField.setText(precision.format(mExpense.getExpensesTotal()));
         mAmountField.addTextChangedListener(new TextWatcher() {
@@ -124,7 +127,7 @@ public class ExpenseFragment extends Fragment {
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         String selectedValue = mExpense.getExpensesCategory();
         mCategorySpinner.setAdapter(spinnerArrayAdapter);
-        if(selectedValue != null){
+        if (selectedValue != null) {
             int spinnerPosition = spinnerArrayAdapter.getPosition(selectedValue);
             mCategorySpinner.setSelection(spinnerPosition);
         }
@@ -140,11 +143,11 @@ public class ExpenseFragment extends Fragment {
             }
         });
 
-        mExpenseImageView = (ImageView)view.findViewById(R.id.iv_expensePhoto);
+        mExpenseImageView = (ImageView) view.findViewById(R.id.iv_expensePhoto);
 
-        mAddPhotoButton = (Button)view.findViewById(R.id.btn_addPhoto);
+        mAddPhotoButton = (Button) view.findViewById(R.id.btn_addPhoto);
 
-        mNoteField = (EditText)view.findViewById(R.id.expense_note);
+        mNoteField = (EditText) view.findViewById(R.id.expense_note);
         mNoteField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -174,5 +177,24 @@ public class ExpenseFragment extends Fragment {
     private void updateTime() {
         DateFormat tf = new SimpleDateFormat("hh:mm a");
         mTimeButton.setText(tf.format(mExpense.getExpensesTime()));
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment_delete, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.delete_item:
+                ExpenseLab.get(getActivity()).removeExpense(mExpense);
+                getActivity().finish();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
