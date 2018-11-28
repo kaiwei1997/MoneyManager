@@ -59,7 +59,12 @@ public class OverviewFragment extends Fragment {
         mExpensesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Expense expense = new Expense();
+                ExpenseLab.get(getActivity()).addexpense(expense);
+                Intent intent = ExpensePagerActivity
 
+                        .newIntent(getActivity(), expense.getExpensesId());
+                startActivity(intent);
             }
         });
 

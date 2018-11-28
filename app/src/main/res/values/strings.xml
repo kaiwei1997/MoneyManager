@@ -22,6 +22,7 @@
     <string name="category_type">Choose Category Type</string>
     <string name="income">Income</string>
     <string name="expense">Expense</string>
+    <string name="take_photo">Add Photo</string>
     <string name="save">Save</string>
     <string name="delete_category">Delete Item</string>
     <string name="date_picker_title">Date of Crime:</string>
