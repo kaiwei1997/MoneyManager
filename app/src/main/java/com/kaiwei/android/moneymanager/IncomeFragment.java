@@ -118,7 +118,12 @@ public class IncomeFragment extends Fragment {
                 getActivity(), android.R.layout.simple_spinner_item, categoryList);
 
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        String selectedValue = mIncome.getIncomeCategory();
         mCategorySpinner.setAdapter(spinnerArrayAdapter);
+        if(selectedValue != null){
+            int spinnerPosition = spinnerArrayAdapter.getPosition(selectedValue);
+            mCategorySpinner.setSelection(spinnerPosition);
+        }
         mCategorySpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
