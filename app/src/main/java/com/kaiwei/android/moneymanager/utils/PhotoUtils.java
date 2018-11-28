@@ -5,7 +5,7 @@ import android.graphics.BitmapFactory;
 
 import java.io.ByteArrayOutputStream;
 
-public class Utils {
+public class PhotoUtils {
     public static byte[] getBytes (Bitmap bitmap){
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();

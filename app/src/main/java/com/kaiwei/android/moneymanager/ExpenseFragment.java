@@ -32,7 +32,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-import com.kaiwei.android.moneymanager.utils.Utils;
+import com.kaiwei.android.moneymanager.utils.PhotoUtils;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -175,7 +175,7 @@ public class ExpenseFragment extends Fragment {
         mExpenseImageView = (ImageView) view.findViewById(R.id.iv_expensePhoto);
         byte[] data = mExpense.getExpensesPhotoFile();
         if(data != null){
-            Bitmap bitmap = Utils.getImage(data);
+            Bitmap bitmap = PhotoUtils.getImage(data);
             mExpenseImageView.setImageBitmap(bitmap);
         }
 
@@ -282,12 +282,12 @@ public class ExpenseFragment extends Fragment {
             } else if(requestCode == TAKE_PHOTO_REQUEST){
                 Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                 mExpenseImageView.setImageBitmap(bitmap);
-                mExpense.setExpensesPhotoFile(Utils.getBytes(bitmap));
+                mExpense.setExpensesPhotoFile(PhotoUtils.getBytes(bitmap));
             } else if(requestCode == SELECT_IMAGE_REQUEST){
                 Uri selectedImage = data.getData();
                 mExpenseImageView.setImageURI(selectedImage);
                 Bitmap bitmap = ((BitmapDrawable) mExpenseImageView.getDrawable()).getBitmap();
-                mExpense.setExpensesPhotoFile(Utils.getBytes(bitmap));
+                mExpense.setExpensesPhotoFile(PhotoUtils.getBytes(bitmap));
             }
         }
 
