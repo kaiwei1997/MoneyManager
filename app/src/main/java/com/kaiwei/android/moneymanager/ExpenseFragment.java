@@ -29,11 +29,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.kaiwei.android.moneymanager.utils.PhotoUtils;
+import com.nmaltais.calcdialog.CalcDialog;
 
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -41,7 +45,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-public class ExpenseFragment extends Fragment {
+public class ExpenseFragment extends Fragment implements CalcDialog.CalcDialogCallback {
 
     private Expense mExpense;
     private Button mDateButton;
@@ -51,6 +55,7 @@ public class ExpenseFragment extends Fragment {
     private ImageView mExpenseImageView;
     private Button mAddPhotoButton;
     private EditText mNoteField;
+    private ImageButton mCalculator;
 
     private static final String ARG_EXPENSES_ID = "expenses_id";
     private static final String CATEGORY_TYPE = "Expense";
@@ -65,6 +70,9 @@ public class ExpenseFragment extends Fragment {
     private static final int REQUEST_TIME = 1;
     private static final int SELECT_IMAGE_REQUEST = 7;
     private static final int TAKE_PHOTO_REQUEST = 8;
+    private static final int CALC_REQUEST_CODE = 2;
+
+    private BigDecimal value;
 
     public static ExpenseFragment newInstance(UUID expensesId) {
         Bundle args = new Bundle();
@@ -147,6 +155,19 @@ public class ExpenseFragment extends Fragment {
             }
         });
 
+        mCalculator = (ImageButton)view.findViewById(R.id.btn_calculator);
+        value = null;
+        mCalculator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getFragmentManager();
+                final CalcDialog calcDialog = CalcDialog.newInstance(CALC_REQUEST_CODE);
+                calcDialog.setValue(value);
+                calcDialog.setTargetFragment(ExpenseFragment.this, CALC_REQUEST_CODE);
+                calcDialog.show(fragmentManager, "calc_dialog");
+            }
+        });
+
         mCategorySpinner = (Spinner) view.findViewById(R.id.spinner_expenseCategory);
         CategoryLab categoryLab = CategoryLab.get(getActivity());
         final List<String> categoryList = categoryLab.getCategoryForType(CATEGORY_TYPE);
@@ -174,7 +195,7 @@ public class ExpenseFragment extends Fragment {
 
         mExpenseImageView = (ImageView) view.findViewById(R.id.iv_expensePhoto);
         byte[] data = mExpense.getExpensesPhotoFile();
-        if(data != null){
+        if (data != null) {
             Bitmap bitmap = PhotoUtils.getImage(data);
             mExpenseImageView.setImageBitmap(bitmap);
         }
@@ -254,59 +275,67 @@ public class ExpenseFragment extends Fragment {
         }
     }
 
-        private void updateDate () {
-            DateFormat df = new SimpleDateFormat("E, MMMM dd, yyyy");
-            mDateButton.setText(df.format(mExpense.getExpensesDate()));
+    private void updateDate() {
+        DateFormat df = new SimpleDateFormat("E, MMMM dd, yyyy");
+        mDateButton.setText(df.format(mExpense.getExpensesDate()));
+    }
+
+    private void updateTime() {
+        DateFormat tf = new SimpleDateFormat("hh:mm a");
+        mTimeButton.setText(tf.format(mExpense.getExpensesTime()));
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) {
+            return;
         }
-
-        private void updateTime () {
-            DateFormat tf = new SimpleDateFormat("hh:mm a");
-            mTimeButton.setText(tf.format(mExpense.getExpensesTime()));
-        }
-
-        @Override
-        public void onActivityResult ( int requestCode, int resultCode, Intent data){
-            if (resultCode != Activity.RESULT_OK) {
-                return;
-            }
-            if (requestCode == REQUEST_DATE) {
-                Date date = (Date) data
-                        .getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-                mExpense.setExpensesDate(date);
-                updateDate();
-            } else if (requestCode == REQUEST_TIME) {
-                Date time = (Date) data
-                        .getSerializableExtra(TimePickerFragment.EXTRA_TIME);
-                mExpense.setExpensesTime(time);
-                updateTime();
-            } else if(requestCode == TAKE_PHOTO_REQUEST){
-                Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-                mExpenseImageView.setImageBitmap(bitmap);
-                mExpense.setExpensesPhotoFile(PhotoUtils.getBytes(bitmap));
-            } else if(requestCode == SELECT_IMAGE_REQUEST){
-                Uri selectedImage = data.getData();
-                mExpenseImageView.setImageURI(selectedImage);
-                Bitmap bitmap = ((BitmapDrawable) mExpenseImageView.getDrawable()).getBitmap();
-                mExpense.setExpensesPhotoFile(PhotoUtils.getBytes(bitmap));
-            }
-        }
-
-        @Override
-        public void onCreateOptionsMenu (Menu menu, MenuInflater inflater){
-            super.onCreateOptionsMenu(menu, inflater);
-            inflater.inflate(R.menu.fragment_delete, menu);
-        }
-
-        @Override
-        public boolean onOptionsItemSelected (MenuItem item){
-            switch (item.getItemId()) {
-                case R.id.delete_item:
-                    ExpenseLab.get(getActivity()).removeExpense(mExpense);
-                    getActivity().finish();
-                    return true;
-
-                default:
-                    return super.onOptionsItemSelected(item);
-            }
+        if (requestCode == REQUEST_DATE) {
+            Date date = (Date) data
+                    .getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+            mExpense.setExpensesDate(date);
+            updateDate();
+        } else if (requestCode == REQUEST_TIME) {
+            Date time = (Date) data
+                    .getSerializableExtra(TimePickerFragment.EXTRA_TIME);
+            mExpense.setExpensesTime(time);
+            updateTime();
+        } else if (requestCode == TAKE_PHOTO_REQUEST) {
+            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+            mExpenseImageView.setImageBitmap(bitmap);
+            mExpense.setExpensesPhotoFile(PhotoUtils.getBytes(bitmap));
+        } else if (requestCode == SELECT_IMAGE_REQUEST) {
+            Uri selectedImage = data.getData();
+            mExpenseImageView.setImageURI(selectedImage);
+            Bitmap bitmap = ((BitmapDrawable) mExpenseImageView.getDrawable()).getBitmap();
+            mExpense.setExpensesPhotoFile(PhotoUtils.getBytes(bitmap));
         }
     }
+
+    @Override
+    public void onValueEntered(int requestCode, BigDecimal value) {
+        if(requestCode == CALC_REQUEST_CODE) {
+            DecimalFormat precision = new DecimalFormat("0.00");
+            mAmountField.setText(precision.format(Double.valueOf(value.toPlainString())));
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment_delete, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.delete_item:
+                ExpenseLab.get(getActivity()).removeExpense(mExpense);
+                getActivity().finish();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+}
