@@ -9,7 +9,6 @@ import com.kaiwei.android.moneymanager.database.ExpenseCursorWrapper;
 import com.kaiwei.android.moneymanager.database.MoneyManagerBaseHelper;
 import com.kaiwei.android.moneymanager.database.MoneyManagerDbSchema.ExpenseTable;
 
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -113,7 +112,7 @@ public class ExpenseLab {
         values.put(ExpenseTable.Cols.TIME, expenses.getExpensesTime().getTime());
         values.put(ExpenseTable.Cols.AMOUNT, expenses.getExpensesTotal());
         values.put(ExpenseTable.Cols.CATEGORY, expenses.getExpensesCategory());
-        values.put(ExpenseTable.Cols.PHOTO, expenses.getExpensesPhotoFile());
+        //values.put(ExpenseTable.Cols.PHOTO, expenses.getExpensesPhotoFile());
         values.put(ExpenseTable.Cols.NOTE, expenses.getExpensesNote());
 
         return values;

@@ -1,5 +1,6 @@
 package com.kaiwei.android.moneymanager;
 
+import java.sql.Blob;
 import java.util.Date;
 import java.util.UUID;
 
@@ -10,7 +11,7 @@ public class Expense {
     private Date mExpensesTime;
     private double mExpensesTotal;
     private String mExpensesCategory;
-    private String mExpensesPhotoFile;
+    private Byte[] mExpensesPhotoFile;
     private String mExpensesNote;
 
     public Expense(){
@@ -59,12 +60,12 @@ public class Expense {
         mExpensesCategory = expensesCategory;
     }
 
-    public String getExpensesPhotoFile() {
-        return mExpensesPhotoFile;
+    public void setExpensesPhotoFile(Byte[] expensesPhotoFile) {
+        mExpensesPhotoFile = expensesPhotoFile;
     }
 
-    public void setExpensesPhotoFile(String expensesPhotoFile) {
-        mExpensesPhotoFile = expensesPhotoFile;
+    public Byte[] getExpensesPhotoFile() {
+        return mExpensesPhotoFile;
     }
 
     public String getExpensesNote() {

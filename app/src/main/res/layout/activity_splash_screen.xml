@@ -25,30 +25,30 @@
         android:layout_marginStart="148dp"
         android:layout_marginEnd="148dp"
         android:layout_marginBottom="24dp"
-        android:background="@drawable/button"
+        android:background="@drawable/button_splash"
         android:padding="15dp"
         android:text="@string/record"
         android:textColor="#0820FF"
         android:textSize="18dp"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tv_welcome"
+        android:fontFamily=""
         android:layout_width="328dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
-        android:layout_marginEnd="70dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="12dp"
         android:text="@string/welcome"
         android:textAlignment="center"
         android:textSize="25dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/tv_intro"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.547"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
