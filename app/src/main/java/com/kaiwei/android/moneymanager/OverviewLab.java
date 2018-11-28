@@ -41,7 +41,7 @@ public class OverviewLab {
         try {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()){
-                overviews.add(cursor.getOverview());
+                overviews.add(cursor.getIncomeOverview());
                 cursor.moveToNext();
             }
         }finally {
@@ -51,7 +51,7 @@ public class OverviewLab {
         try{
             cursor1.moveToFirst();
             while (!cursor1.isAfterLast()){
-                overviews.add(cursor1.getOverview());
+                overviews.add(cursor1.getExpenseOverview());
                 cursor1.moveToNext();
             }
         }finally {

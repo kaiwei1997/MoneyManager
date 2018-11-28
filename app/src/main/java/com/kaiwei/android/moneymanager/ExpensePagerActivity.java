@@ -42,7 +42,7 @@ public class ExpensePagerActivity extends AppCompatActivity {
             @Override
             public Fragment getItem(int i) {
                 Expense expense = mExpenses.get(i);
-                return IncomeFragment.newInstance(expense.getExpensesId());
+                return ExpenseFragment.newInstance(expense.getExpensesId());
             }
 
             @Override

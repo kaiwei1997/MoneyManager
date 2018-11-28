@@ -94,7 +94,7 @@ public class IncomeListFragment extends Fragment {
             super(inflater.inflate(R.layout.list_item_income, parent, false));
             itemView.setOnClickListener(this);
 
-            mCategoryTextView = (TextView) itemView.findViewById(R.id.expense_category);
+            mCategoryTextView = (TextView) itemView.findViewById(R.id.incomeCategory);
             mDateTextView = (TextView) itemView.findViewById(R.id.incomeDate);
             mAmountTextView = (TextView) itemView.findViewById(R.id.incomeAmount);
         }
