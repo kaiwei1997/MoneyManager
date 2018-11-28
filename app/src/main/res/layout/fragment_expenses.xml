@@ -56,85 +56,70 @@
         android:layout_height="46dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:hint="@string/amount_hint"
         android:importantForAutofill="no"
         android:inputType="numberDecimal"
         android:textColor="#000"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_chooseCategory"
         app:layout_constraintStart_toEndOf="@+id/tv_currency"
         app:layout_constraintTop_toBottomOf="@+id/expenses_time"
         tools:targetApi="o" />
 
     <TextView
         android:id="@+id/tv_chooseCategory"
-        android:layout_width="0dp"
+        android:layout_width="352dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:text="@string/choose_category"
         android:textColor="#000"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/spinner_expenseCategory"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_currency" />
+        app:layout_constraintTop_toBottomOf="@+id/expense_total" />
 
     <Spinner
         android:id="@+id/spinner_expenseCategory"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="352dp"
+        android:layout_height="44dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="76dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_addPhoto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_chooseCategory" />
 
     <ImageView
         android:id="@+id/iv_expensePhoto"
-        android:layout_width="0dp"
+        android:layout_width="213dp"
         android:layout_height="160dp"
         android:layout_marginStart="17dp"
-        android:layout_marginTop="68dp"
-        android:layout_marginEnd="27dp"
-        android:layout_marginBottom="68dp"
-        app:layout_constraintBottom_toBottomOf="@+id/expense_note"
-        app:layout_constraintEnd_toStartOf="@+id/btn_addPhoto"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_chooseCategory"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_expenseCategory"
         app:srcCompat="@android:drawable/ic_menu_camera" />
 
     <Button
         android:id="@+id/btn_addPhoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="39dp"
-        android:layout_marginBottom="75dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="64dp"
         android:text="add"
-        app:layout_constraintBottom_toTopOf="@+id/expense_note"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_expensePhoto"
         app:layout_constraintTop_toBottomOf="@+id/spinner_expenseCategory" />
 
     <EditText
         android:id="@+id/expense_note"
-        android:layout_width="0dp"
+        android:layout_width="352dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/note_hint"
         android:importantForAutofill="no"
         android:inputType="textMultiLine"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_addPhoto"
+        app:layout_constraintTop_toBottomOf="@+id/iv_expensePhoto"
         tools:targetApi="o" />
 
     <ImageButton
