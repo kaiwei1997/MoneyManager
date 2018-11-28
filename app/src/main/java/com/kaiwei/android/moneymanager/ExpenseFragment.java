@@ -17,9 +17,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-import com.bumptech.glide.util.ByteBufferUtil;
-
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.UUID;
@@ -93,6 +92,8 @@ public class ExpenseFragment extends Fragment {
         });
 
         mAmountField = (EditText)view.findViewById(R.id.expense_total);
+        DecimalFormat precision = new DecimalFormat("0.00");
+        mAmountField.setText(precision.format(mExpense.getExpensesTotal()));
         mAmountField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
