@@ -1,10 +1,17 @@
 package com.kaiwei.android.moneymanager;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.Editable;
@@ -22,6 +29,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+
+import com.kaiwei.android.moneymanager.utils.Utils;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -46,8 +55,14 @@ public class ExpenseFragment extends Fragment {
     private static final String DIALOG_DATE = "DialogDate";
     private static final String DIALOG_TIME = "DialogTime";
 
+    private static final String TAKE_PHOTO = "Take Photo";
+    private static final String CHOOSE_CATEGORY = "Choose from image category";
+    private static final String CANCEL = "Cancel";
+
     private static final int REQUEST_DATE = 0;
     private static final int REQUEST_TIME = 1;
+    private static final int SELECT_IMAGE_REQUEST = 7;
+    private static final int TAKE_PHOTO_REQUEST = 8;
 
     public static ExpenseFragment newInstance(UUID expensesId) {
         Bundle args = new Bundle();
@@ -76,7 +91,7 @@ public class ExpenseFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_expenses, container, false);
         getActivity().setTitle(R.string.expense);
 
@@ -156,8 +171,34 @@ public class ExpenseFragment extends Fragment {
         });
 
         mExpenseImageView = (ImageView) view.findViewById(R.id.iv_expensePhoto);
+        byte[] data = mExpense.getExpensesPhotoFile();
+        if(data != null){
+            Bitmap bitmap = Utils.getImage(data);
+            mExpenseImageView.setImageBitmap(bitmap);
+        }
 
         mAddPhotoButton = (Button) view.findViewById(R.id.btn_addPhoto);
+        mAddPhotoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final CharSequence[] items = {TAKE_PHOTO, CHOOSE_CATEGORY, CANCEL};
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle(R.string.dialog_expense_photo);
+                builder.setItems(items, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int item) {
+                        if (items[item].equals(TAKE_PHOTO)) {
+                            takePhoto();
+                        } else if (items[item].equals(CHOOSE_CATEGORY)) {
+                            selectImage();
+                        } else if (items[item].equals(CANCEL)) {
+                            dialog.dismiss();
+                        }
+                    }
+                });
+                builder.show();
+            }
+        });
 
         mNoteField = (EditText) view.findViewById(R.id.expense_note);
         mNoteField.addTextChangedListener(new TextWatcher() {
@@ -181,51 +222,84 @@ public class ExpenseFragment extends Fragment {
         return view;
     }
 
-    private void updateDate() {
-        DateFormat df = new SimpleDateFormat("E, MMMM dd, yyyy");
-        mDateButton.setText(df.format(mExpense.getExpensesDate()));
-    }
-
-    private void updateTime() {
-        DateFormat tf = new SimpleDateFormat("hh:mm a");
-        mTimeButton.setText(tf.format(mExpense.getExpensesTime()));
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode != Activity.RESULT_OK){
-            return;
-        }
-        if(requestCode == REQUEST_DATE){
-            Date date = (Date) data
-                    .getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            mExpense.setExpensesDate(date);
-            updateDate();
-        }
-        else if(requestCode == REQUEST_TIME){
-            Date time = (Date) data
-                    .getSerializableExtra(TimePickerFragment.EXTRA_TIME);
-            mExpense.setExpensesTime(time);
-            updateTime();
+    private void selectImage() {
+        try {
+            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, SELECT_IMAGE_REQUEST);
+            } else {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Profile Picture"), SELECT_IMAGE_REQUEST);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.fragment_delete, menu);
-    }
+    private void takePhoto() {
+        try {
+            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, TAKE_PHOTO_REQUEST);
+            } else {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(Intent.createChooser(intent, getString(R.string.take_photo_title)), TAKE_PHOTO_REQUEST);
+            }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.delete_item:
-                ExpenseLab.get(getActivity()).removeExpense(mExpense);
-                getActivity().finish();
-                return true;
+        } catch (Exception e) {
+            e.printStackTrace();
 
-            default:
-                return super.onOptionsItemSelected(item);
         }
     }
-}
+
+        private void updateDate () {
+            DateFormat df = new SimpleDateFormat("E, MMMM dd, yyyy");
+            mDateButton.setText(df.format(mExpense.getExpensesDate()));
+        }
+
+        private void updateTime () {
+            DateFormat tf = new SimpleDateFormat("hh:mm a");
+            mTimeButton.setText(tf.format(mExpense.getExpensesTime()));
+        }
+
+        @Override
+        public void onActivityResult ( int requestCode, int resultCode, Intent data){
+            if (resultCode != Activity.RESULT_OK) {
+                return;
+            }
+            if (requestCode == REQUEST_DATE) {
+                Date date = (Date) data
+                        .getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+                mExpense.setExpensesDate(date);
+                updateDate();
+            } else if (requestCode == REQUEST_TIME) {
+                Date time = (Date) data
+                        .getSerializableExtra(TimePickerFragment.EXTRA_TIME);
+                mExpense.setExpensesTime(time);
+                updateTime();
+            } else if(requestCode == TAKE_PHOTO_REQUEST){
+                Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                mExpenseImageView.setImageBitmap(bitmap);
+                mExpense.setExpensesPhotoFile(Utils.getBytes(bitmap));
+            }
+        }
+
+        @Override
+        public void onCreateOptionsMenu (Menu menu, MenuInflater inflater){
+            super.onCreateOptionsMenu(menu, inflater);
+            inflater.inflate(R.menu.fragment_delete, menu);
+        }
+
+        @Override
+        public boolean onOptionsItemSelected (MenuItem item){
+            switch (item.getItemId()) {
+                case R.id.delete_item:
+                    ExpenseLab.get(getActivity()).removeExpense(mExpense);
+                    getActivity().finish();
+                    return true;
+
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
+        }
+    }

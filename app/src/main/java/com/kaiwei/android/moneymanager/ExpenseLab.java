@@ -32,7 +32,7 @@ public class ExpenseLab {
                 .getWritableDatabase();
     }
 
-    public void addexpense(Expense e){
+    public void addExpense(Expense e){
         ContentValues values = getContentValues(e);
 
         mDatabase.insert(ExpenseTable.NAME,null, values);
@@ -112,7 +112,7 @@ public class ExpenseLab {
         values.put(ExpenseTable.Cols.TIME, expenses.getExpensesTime().getTime());
         values.put(ExpenseTable.Cols.AMOUNT, expenses.getExpensesTotal());
         values.put(ExpenseTable.Cols.CATEGORY, expenses.getExpensesCategory());
-        //values.put(ExpenseTable.Cols.PHOTO, expenses.getExpensesPhotoFile());
+        values.put(ExpenseTable.Cols.PHOTO, expenses.getExpensesPhotoFile());
         values.put(ExpenseTable.Cols.NOTE, expenses.getExpensesNote());
 
         return values;

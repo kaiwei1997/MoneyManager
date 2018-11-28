@@ -30,7 +30,7 @@
         android:text="@string/record"
         android:textColor="#0820FF"
         android:textSize="18dp"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

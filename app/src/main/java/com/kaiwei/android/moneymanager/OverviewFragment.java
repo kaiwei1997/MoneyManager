@@ -60,7 +60,7 @@ public class OverviewFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Expense expense = new Expense();
-                ExpenseLab.get(getActivity()).addexpense(expense);
+                ExpenseLab.get(getActivity()).addExpense(expense);
                 Intent intent = ExpensePagerActivity
 
                         .newIntent(getActivity(), expense.getExpensesId());

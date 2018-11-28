@@ -11,7 +11,7 @@ public class Expense {
     private Date mExpensesTime;
     private double mExpensesTotal;
     private String mExpensesCategory;
-    private Byte[] mExpensesPhotoFile;
+    private byte[] mExpensesPhotoFile;
     private String mExpensesNote;
 
     public Expense(){
@@ -60,11 +60,11 @@ public class Expense {
         mExpensesCategory = expensesCategory;
     }
 
-    public void setExpensesPhotoFile(Byte[] expensesPhotoFile) {
+    public void setExpensesPhotoFile(byte[] expensesPhotoFile) {
         mExpensesPhotoFile = expensesPhotoFile;
     }
 
-    public Byte[] getExpensesPhotoFile() {
+    public byte[] getExpensesPhotoFile() {
         return mExpensesPhotoFile;
     }
 

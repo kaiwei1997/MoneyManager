@@ -27,4 +27,6 @@
     <string name="delete_category">Delete Item</string>
     <string name="date_picker_title">Date:</string>
     <string name="time_picker_title">Time:</string>
+    <string name="dialog_expense_photo">Add Expense Photo</string>
+    <string name="take_photo_title">Take a photo for expense</string>
 </resources>

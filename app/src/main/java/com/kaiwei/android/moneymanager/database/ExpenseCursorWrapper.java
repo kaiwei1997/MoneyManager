@@ -20,7 +20,7 @@ public class ExpenseCursorWrapper extends CursorWrapper {
         long time = getLong(getColumnIndex(ExpenseTable.Cols.TIME));
         Double amount = getDouble(getColumnIndex(ExpenseTable.Cols.AMOUNT));
         String category = getString(getColumnIndex(ExpenseTable.Cols.CATEGORY));
-        //Byte[] photoFile = (getColumnIndex(ExpenseTable.Cols.PHOTO));
+        byte[] photoFile = getBlob(getColumnIndex(ExpenseTable.Cols.PHOTO));
         String note = getString(getColumnIndex(ExpenseTable.Cols.NOTE));
 
         Expense expenses = new Expense(UUID.fromString(uuidString));
@@ -28,7 +28,7 @@ public class ExpenseCursorWrapper extends CursorWrapper {
         expenses.setExpensesTime(new Date(time));
         expenses.setExpensesTotal(amount);
         expenses.setExpensesCategory(category);
-        //expenses.setExpensesPhotoFile(photoFile);
+        expenses.setExpensesPhotoFile(photoFile);
         expenses.setExpensesNote(note);
 
         return expenses;
