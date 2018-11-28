@@ -21,27 +21,35 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
+import com.nmaltais.calcdialog.CalcDialog;
+
+import java.math.BigDecimal;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-public class IncomeFragment extends Fragment {
+public class IncomeFragment extends Fragment implements CalcDialog.CalcDialogCallback{
     private Income mIncome;
     private Button mDateButton;
     private EditText mAmountField;
     private Spinner mCategorySpinner;
     private EditText mNoteField;
-
+    private ImageButton mCalculator;
 
     private static final String ARG_INCOME_ID = "income_id";
     private static final String CATEGORY_TYPE = "Income";
     private static final String DIALOG_DATE = "DialogDate";
 
     private static final int REQUEST_DATE = 0;
+    private static final int CALC_REQUEST_CODE = 2;
+
+    private BigDecimal value;
 
     public static IncomeFragment newInstance(UUID incomeId) {
         Bundle args = new Bundle();
@@ -88,7 +96,8 @@ public class IncomeFragment extends Fragment {
         });
 
         mAmountField = (EditText) v.findViewById(R.id.expense_total);
-        mAmountField.setText(String.valueOf(mIncome.getIncomeTotal()));
+        DecimalFormat precision = new DecimalFormat("0.00");
+        mAmountField.setText(String.valueOf(precision.format(mIncome.getIncomeTotal())));
         mAmountField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -107,6 +116,19 @@ public class IncomeFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
 
+            }
+        });
+
+        mCalculator = (ImageButton)v.findViewById(R.id.btn_calculator);
+        value = null;
+        mCalculator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getFragmentManager();
+                final CalcDialog calcDialog = CalcDialog.newInstance(CALC_REQUEST_CODE);
+                calcDialog.setValue(value);
+                calcDialog.setTargetFragment(IncomeFragment.this, CALC_REQUEST_CODE);
+                calcDialog.show(fragmentManager, "calc_dialog");
             }
         });
 
@@ -161,6 +183,15 @@ public class IncomeFragment extends Fragment {
     private void updateDate() {
         DateFormat df = new SimpleDateFormat("E, MMMM dd, yyyy");
         mDateButton.setText(df.format(mIncome.getIncomeDate()));
+    }
+
+    @Override
+    public void onValueEntered(int requestCode, BigDecimal value) {
+        if(requestCode == CALC_REQUEST_CODE){
+            DecimalFormat precision = new DecimalFormat("0.00");
+            mAmountField.setText(precision.format(Double.valueOf(value.toPlainString())));
+            mIncome.setIncomeTotal(Double.valueOf(value.toPlainString()));
+        }
     }
 
     @Override
