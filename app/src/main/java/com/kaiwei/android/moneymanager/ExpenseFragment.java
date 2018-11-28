@@ -122,7 +122,12 @@ public class ExpenseFragment extends Fragment {
                 getActivity(), android.R.layout.simple_spinner_item, categoryList);
 
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        String selectedValue = mExpense.getExpensesCategory();
         mCategorySpinner.setAdapter(spinnerArrayAdapter);
+        if(selectedValue != null){
+            int spinnerPosition = spinnerArrayAdapter.getPosition(selectedValue);
+            mCategorySpinner.setSelection(spinnerPosition);
+        }
         mCategorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
