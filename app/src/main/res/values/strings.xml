@@ -1,6 +1,8 @@
 <resources>
     <string name="overview_title">Overview</string>
     <string name="income_list">Income List</string>
+    <string name="debt_list">Debt List</string>
+    <string name="debt_detail">Debt Detail</string>
     <string name="income_detail">Income Detail</string>
     <string name="expense_list">Expense List</string>
     <string name="expense_detail">Expense Detail</string>
@@ -40,6 +42,8 @@
     <string name="income_empty_text">There Is No Income Record</string>
     <string name="expense_empty_text">There Is No Expense Record</string>
     <string name="overview_empty_text">There Is No Transaction Yet</string>
+    <string name="debt_empty_text">Nobody owe you money.</string>
+    <string name="new_debt">New Debt</string>
     <string name="show_balance">Show Balance</string>
     <string name="hide_balance">Hide Balance</string>
     <string name="show_subtitle">Show Subtitle</string>
@@ -52,4 +56,27 @@
         <item quantity="one">%1$d income</item>
         <item quantity="other">%1$d incomes</item>
     </plurals>
+    <plurals name="debt_subtitle_plural">
+        <item quantity="one">%1$d debt</item>
+        <item quantity="other">%1$d debts</item>
+    </plurals>
+
+    <string name="Title">TITLE</string>
+    <string name="title_hint">Enter a title for the debt.</string>
+    <string name="details">DETAILS</string>
+    <string name="description_hint">Enter description for the debt.</string>
+    <string name="return_money">Return</string>
+    <string name="choose_debtor">CHOOSE DEBTOR</string>
+    <string name="send_message">SEND DEBTOR DEBT MESSAGE</string>
+    <string name="call_debtor">CALL DEBTOR</string>
+
+    <string name="debt_report">%1$s! The debt was owe on %2$s. %3$s, and %4$s
+</string>
+    <string name="debt_report_returned">The debt is cleared</string>
+    <string name="debt_report_not_returned">The case is not cleared</string>
+    <string name="debt_report_no_debtor">there is no debtor.</string>
+    <string name="debt_report_debtor">the debtor is %s.</string>
+    <string name="crime_report_subject">Money Manager Debt Report</string>
+    <string name="send_report">Send debt report via</string>
+
 </resources>

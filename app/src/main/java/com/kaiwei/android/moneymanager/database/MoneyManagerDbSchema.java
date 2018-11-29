@@ -36,4 +36,21 @@ public class MoneyManagerDbSchema {
             public static final String NOTE = "expenses_note";
         }
     }
+
+    public static final class DebtTable{
+        public static final String NAME = "debt_record";
+
+        public static final class Cols{
+            public static final String UUID = "debt_uuid";
+            public static final String TITLE = "debt_title";
+            public static final String DATE = "debt_date";
+            public static final String DESCRIPTION = "debt_description";
+            public static final String AMOUNT = "debt_amount";
+            public static final String RETURNED = "returned";
+            public static final String DEBTOR = "debtor";
+            public static final String CONTACT = "contact";
+            public static final String PHOTO = "debt_photo_file";
+
+        }
+    }
 }

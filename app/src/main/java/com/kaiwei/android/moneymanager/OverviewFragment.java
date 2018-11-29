@@ -140,6 +140,9 @@ public class OverviewFragment extends Fragment {
                 getActivity().invalidateOptionsMenu();
                 updateSubtitle();
                 return true;
+            case R.id.debt_management:
+                Intent intent1 = new Intent(getActivity(), DebtListActivity.class);
+                startActivity(intent1);
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -33,11 +33,14 @@
             android:name=".IncomeListActivity"
             android:parentActivityName=".OverviewActivity"
             ></activity>
+        <activity android:name=".DebtListActivity"
+            android:parentActivityName=".OverviewActivity"/>
         <activity
             android:name=".ExpensePagerActivity"
             android:parentActivityName=".ExpenseListActivity">
-
         </activity>
+        <activity android:name=".DebtPagerActivity"
+            android:parentActivityName=".DebtListActivity"/>
         <activity
             android:name=".ExpenseListActivity"
             android:parentActivityName=".OverviewActivity">

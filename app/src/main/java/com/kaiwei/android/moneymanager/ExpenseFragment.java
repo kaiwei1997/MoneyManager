@@ -254,7 +254,7 @@ public class ExpenseFragment extends Fragment implements CalcDialog.CalcDialogCa
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Profile Picture"), SELECT_IMAGE_REQUEST);
+                startActivityForResult(Intent.createChooser(intent, "Select Expense Picture"), SELECT_IMAGE_REQUEST);
             }
         } catch (Exception e) {
             e.printStackTrace();

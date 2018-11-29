@@ -4,7 +4,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.kaiwei.android.moneymanager.Debt;
 import com.kaiwei.android.moneymanager.database.MoneyManagerDbSchema.CategoryTable;
+import com.kaiwei.android.moneymanager.database.MoneyManagerDbSchema.DebtTable;
 import com.kaiwei.android.moneymanager.database.MoneyManagerDbSchema.ExpenseTable;
 import com.kaiwei.android.moneymanager.database.MoneyManagerDbSchema.IncomeTable;
 
@@ -45,6 +47,20 @@ public class MoneyManagerBaseHelper extends SQLiteOpenHelper {
                 ExpenseTable.Cols.CATEGORY + ", " +
                 ExpenseTable.Cols.PHOTO + ", " +
                 ExpenseTable.Cols.NOTE +
+                ")"
+        );
+
+        db.execSQL("create table " + DebtTable.NAME + "(" +
+                "_id integer primary key autoincrement," +
+                DebtTable.Cols.UUID + ", " +
+                DebtTable.Cols.TITLE + ", " +
+                DebtTable.Cols.DATE + ", " +
+                DebtTable.Cols.DESCRIPTION + ", " +
+                DebtTable.Cols.AMOUNT + ", " +
+                DebtTable.Cols.RETURNED + ", " +
+                DebtTable.Cols.DEBTOR + ", " +
+                DebtTable.Cols.CONTACT + ", " +
+                DebtTable.Cols.PHOTO +
                 ")"
         );
     }
