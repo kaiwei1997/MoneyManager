@@ -29,4 +29,8 @@
     <string name="time_picker_title">Time:</string>
     <string name="dialog_expense_photo">Add Expense Photo</string>
     <string name="take_photo_title">Take a photo for expense</string>
+    <string name="jump_to_first">Jump to first</string>
+    <string name="jump_to_last">Jump to last</string>
+    <string name="income_empty_text">There Is No Income Record</string>
+    <string name="expense_empty_text">There Is No Expense Record</string>
 </resources>

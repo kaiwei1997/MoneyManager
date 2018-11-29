@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -23,6 +24,8 @@ import java.util.List;
 public class IncomeListFragment extends Fragment {
     private RecyclerView mIncomeRecyclerView;
     private IncomeAdapter mIncomeAdapter;
+    private TextView mEmptyTextView;
+    private Button mNewIncomeButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,15 @@ public class IncomeListFragment extends Fragment {
         mIncomeRecyclerView = (RecyclerView) view
                 .findViewById(R.id.income_recycler_view);
         mIncomeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        mEmptyTextView = (TextView)view.findViewById(R.id.income_empty_text);
+        mNewIncomeButton = (Button) view.findViewById(R.id.new_income_button);
+        mNewIncomeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CreateNewIncome();
+            }
+        });
 
         updateUI();
 
@@ -60,19 +72,31 @@ public class IncomeListFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.new_income:
-                Income income = new Income();
-                IncomeLab.get(getActivity()).addIncome(income);
-                Intent intent = IncomePagerActivity.newIntent(getActivity(), income.getIncomeId());
-                startActivity(intent);
+                CreateNewIncome();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+    private void CreateNewIncome(){
+        Income income = new Income();
+        IncomeLab.get(getActivity()).addIncome(income);
+        Intent intent = IncomePagerActivity.newIntent(getActivity(), income.getIncomeId());
+        startActivity(intent);
+    }
+
     private void updateUI() {
         IncomeLab incomeLab = IncomeLab.get(getActivity());
         List<Income> incomes = incomeLab.getIncomes();
+
+        if(incomes.size() == 0){
+            mEmptyTextView.setVisibility(View.VISIBLE);
+            mNewIncomeButton.setVisibility(View.VISIBLE);
+        }else{
+            mEmptyTextView.setVisibility(View.GONE);
+            mNewIncomeButton.setVisibility(View.GONE);
+        }
 
         if (mIncomeAdapter == null) {
             mIncomeAdapter = new IncomeAdapter(incomes);

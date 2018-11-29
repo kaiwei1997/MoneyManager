@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -23,6 +24,9 @@ import java.util.List;
 public class ExpenseListFragment extends Fragment {
     private RecyclerView mExpenseRecyclerView;
     private ExpenseAdapter mExpenseAdapter;
+    private TextView mEmptyTextView;
+    private Button mNewExpenseButton;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,14 @@ public class ExpenseListFragment extends Fragment {
         mExpenseRecyclerView = (RecyclerView) view
                 .findViewById(R.id.expenses_recycler_view);
         mExpenseRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mEmptyTextView = (TextView)view.findViewById(R.id.expense_empty_text);
+        mNewExpenseButton = (Button) view.findViewById(R.id.new_expense_button);
+        mNewExpenseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CreateNewExpense();
+            }
+        });
 
         updateUI();
 
@@ -61,19 +73,32 @@ public class ExpenseListFragment extends Fragment {
 
         switch (item.getItemId()) {
             case R.id.new_expense:
-                Expense expense = new Expense();
-                ExpenseLab.get(getActivity()).addExpense(expense);
-                Intent intent = ExpensePagerActivity.newIntent(getActivity(), expense.getExpensesId());
-                startActivity(intent);
+                CreateNewExpense();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+    private void CreateNewExpense(){
+        Expense expense = new Expense();
+        ExpenseLab.get(getActivity()).addExpense(expense);
+        Intent intent = ExpensePagerActivity.newIntent(getActivity(), expense.getExpensesId());
+        startActivity(intent);
+    }
+
+
     private void updateUI() {
         ExpenseLab expenseLab = ExpenseLab.get(getActivity());
         List<Expense> expenses = expenseLab.getExpenses();
+
+        if(expenses.size() == 0){
+            mEmptyTextView.setVisibility(View.VISIBLE);
+            mNewExpenseButton.setVisibility(View.VISIBLE);
+        }else{
+            mEmptyTextView.setVisibility(View.GONE);
+            mNewExpenseButton.setVisibility(View.GONE);
+        }
 
         if (mExpenseAdapter == null) {
             mExpenseAdapter = new ExpenseAdapter(expenses);
