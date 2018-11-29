@@ -30,6 +30,7 @@ public class CategoryPagerActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_pager);
+        setTitle(R.string.category_detail);
 
         UUID categoryId = (UUID) getIntent()
         .getSerializableExtra(EXTRA_CATEGORY_ID);

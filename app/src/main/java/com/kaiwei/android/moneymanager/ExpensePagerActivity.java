@@ -35,6 +35,7 @@ public class ExpensePagerActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expense_pager);
+        setTitle(R.string.expense_detail);
 
         UUID expenseId = (UUID) getIntent()
                 .getSerializableExtra(EXTRA_EXPENSE_ID);

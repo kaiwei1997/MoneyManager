@@ -40,6 +40,7 @@ public class CategoryFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActivity().setTitle(R.string.category_detail);
         UUID categoryId = (UUID) getArguments().getSerializable(ARG_CATEGORY_ID);
         mCategory = CategoryLab.get(getActivity()).getCategory(categoryId);
         setHasOptionsMenu(true);

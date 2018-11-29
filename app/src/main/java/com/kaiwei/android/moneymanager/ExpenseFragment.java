@@ -86,6 +86,7 @@ public class ExpenseFragment extends Fragment implements CalcDialog.CalcDialogCa
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActivity().setTitle(R.string.expense_detail);
         UUID expenseId = (UUID) getArguments().getSerializable(ARG_EXPENSES_ID);
         mExpense = ExpenseLab.get(getActivity()).getExpense(expenseId);
         setHasOptionsMenu(true);

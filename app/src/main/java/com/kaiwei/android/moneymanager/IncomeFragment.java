@@ -66,6 +66,7 @@ public class IncomeFragment extends Fragment implements CalcDialog.CalcDialogCal
         UUID incomeId = (UUID) getArguments().getSerializable(ARG_INCOME_ID);
         mIncome = IncomeLab.get(getActivity()).getIncome(incomeId);
         setHasOptionsMenu(true);
+        getActivity().setTitle(R.string.income_detail);
     }
 
     @Override

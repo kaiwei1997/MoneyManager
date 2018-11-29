@@ -1,4 +1,11 @@
 <resources>
+    <string name="overview_title">Overview</string>
+    <string name="income_list">Income List</string>
+    <string name="income_detail">Income Detail</string>
+    <string name="expense_list">Expense List</string>
+    <string name="expense_detail">Expense Detail</string>
+    <string name="category_setting">Category Setting</string>
+    <string name="category_detail">Category Detail</string>
     <string name="app_name">Money Manager</string>
     <string name="welcome">Hello, Welcome Back \n Money Manager</string>
     <string name="intro">Money Manger let you record all your income and expenses.So you will not get broke</string>
@@ -14,7 +21,6 @@
     <string name="new_Income">New Income</string>
     <string name="new_expense">New Expense</string>
     <string name="breakdown">Breakdown</string>
-    <string name="income_detail">Income Detail</string>
     <string name="expenses_detail">Expenses Detail</string>
     <string name="category">Category</string>
     <string name="new_category">New Category</string>
@@ -33,4 +39,5 @@
     <string name="jump_to_last">Jump to last</string>
     <string name="income_empty_text">There Is No Income Record</string>
     <string name="expense_empty_text">There Is No Expense Record</string>
+    <string name="overview_empty_text">There Is No Transaction Yet</string>
 </resources>

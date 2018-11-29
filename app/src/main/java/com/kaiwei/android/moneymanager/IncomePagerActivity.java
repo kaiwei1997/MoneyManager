@@ -35,6 +35,7 @@ public class IncomePagerActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_income_pager);
+        setTitle(R.string.income_detail);
 
         UUID incomeId = (UUID) getIntent()
         .getSerializableExtra(EXTRA_INCOME_ID);

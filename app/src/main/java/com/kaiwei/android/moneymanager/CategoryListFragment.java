@@ -25,6 +25,7 @@ public class CategoryListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActivity().setTitle(R.string.category_setting);
         setHasOptionsMenu(true);
     }
 

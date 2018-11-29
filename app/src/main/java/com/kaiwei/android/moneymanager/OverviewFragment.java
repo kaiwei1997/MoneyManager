@@ -27,6 +27,7 @@ public class OverviewFragment extends Fragment {
     private TextView mExpensesTotal;
     private Button mIncomeDetailButton;
     private Button mExpensesDetailButton;
+    private TextView mEmptyText;
 
     private RecyclerView mOverviewRecyclerView;
 
@@ -35,6 +36,7 @@ public class OverviewFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActivity().setTitle(R.string.overview_title);
         setHasOptionsMenu(true);
     }
 
@@ -96,6 +98,8 @@ public class OverviewFragment extends Fragment {
                 .findViewById(R.id.overview_recycler_view);
         mOverviewRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        mEmptyText = v.findViewById(R.id.tv_EmptyTransaction);
+
         updateOverview();
 
         return v;
@@ -145,6 +149,12 @@ public class OverviewFragment extends Fragment {
     private void updateOverview() {
         OverviewLab overviewLab = OverviewLab.get(getActivity());
         List<Overview> overviews = overviewLab.getOverview();
+
+        if(overviews.size() == 0){
+            mEmptyText.setVisibility(View.VISIBLE);
+        }else{
+            mEmptyText.setVisibility(View.INVISIBLE);
+        }
 
         if (mOverviewAdapter == null) {
             mOverviewAdapter = new OverviewAdapter(overviews);
