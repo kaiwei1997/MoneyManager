@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -32,6 +33,8 @@ public class OverviewFragment extends Fragment {
     private RecyclerView mOverviewRecyclerView;
 
     private OverviewAdapter mOverviewAdapter;
+
+    private boolean mSubtitleVisible;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -117,6 +120,13 @@ public class OverviewFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.fragment_overview, menu);
+
+        MenuItem subtitleItem = menu.findItem(R.id.show_balance);
+        if(mSubtitleVisible){
+            subtitleItem.setTitle(R.string.hide_balance);
+        }else{
+            subtitleItem.setTitle(R.string.show_balance);
+        }
     }
 
     @Override
@@ -125,9 +135,29 @@ public class OverviewFragment extends Fragment {
             case R.id.category:
                 Intent intent = new Intent(getActivity(), CategoryListActivity.class);
                 startActivity(intent);
+            case R.id.show_balance:
+                mSubtitleVisible = !mSubtitleVisible;
+                getActivity().invalidateOptionsMenu();
+                updateSubtitle();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void updateSubtitle(){
+        OverviewLab overviewLab = OverviewLab.get(getActivity());
+        Double balance = overviewLab.getIncomeTotal() - overviewLab.getExpensesTotal();
+        DecimalFormat precision = new DecimalFormat("RM 0.00");
+        String subtitle = precision.format(balance);
+
+        if(!mSubtitleVisible){
+            subtitle = null;
+        }
+
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.getSupportActionBar().setSubtitle(subtitle);
+
     }
 
     private void updateIncomeTotal() {

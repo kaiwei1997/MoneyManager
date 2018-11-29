@@ -40,4 +40,16 @@
     <string name="income_empty_text">There Is No Income Record</string>
     <string name="expense_empty_text">There Is No Expense Record</string>
     <string name="overview_empty_text">There Is No Transaction Yet</string>
+    <string name="show_balance">Show Balance</string>
+    <string name="hide_balance">Hide Balance</string>
+    <string name="show_subtitle">Show Subtitle</string>
+    <string name="hide_subtitle">Hide Subtitle</string>
+    <plurals name="expense_subtitle_plural">
+        <item quantity="one">%1$d expense</item>
+        <item quantity="other">%1$d expenses</item>
+    </plurals>
+    <plurals name="income_subtitle_plural">
+        <item quantity="one">%1$d income</item>
+        <item quantity="other">%1$d incomes</item>
+    </plurals>
 </resources>
