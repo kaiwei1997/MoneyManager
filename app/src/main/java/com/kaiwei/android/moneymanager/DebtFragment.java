@@ -328,10 +328,12 @@ public class DebtFragment extends Fragment {
             Bitmap bitmap = ((BitmapDrawable) mDebtPhoto.getDrawable()).getBitmap();
             mDebt.setDebtPhotoFile(PhotoUtils.getBytes(bitmap));
         } else if (requestCode == REQUEST_CONTACT && data != null) {
+            long contactId = 0;
             Uri contactUri = data.getData();
 
             String[] queryFields = new String[]{
-                    ContactsContract.Contacts.DISPLAY_NAME
+                    ContactsContract.Contacts.DISPLAY_NAME,
+                    ContactsContract.Contacts._ID
             };
 
             Cursor c = getActivity().getContentResolver()
@@ -344,11 +346,39 @@ public class DebtFragment extends Fragment {
 
                 c.moveToFirst();
                 String debtor = c.getString(0);
+                 contactId = c.getLong(1);
                 mDebt.setDebtor(debtor);
+                mDebt.setContact(String.valueOf(contactId));
                 mDebtorButton.setText(debtor);
             } finally {
                 c.close();
             }
+
+            setSuspectPhoneNumber(contactId);
+        }
+    }
+
+    private void setSuspectPhoneNumber(long contactId) {
+        Uri uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
+        Cursor c = getActivity().getContentResolver().query(
+                uri,
+                null,
+                ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
+                new String[] { Long.toString(contactId) },
+                null
+        );
+
+        try {
+            if (c.getCount() == 0) {
+                return;
+            }
+
+            c.moveToFirst();
+            String contactNumber = c.getString(
+                    c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+            mDebt.setContact(contactNumber);
+        } finally {
+            c.close();
         }
     }
 
